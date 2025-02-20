@@ -51,9 +51,3 @@ fclean:
 re: fclean all
 
 norm: ; norminette | grep -v OK
-
-update:
-	git stash
-	git pull
-	git submodule update --recursive --remote
-	git stash pop
