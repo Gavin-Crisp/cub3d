@@ -1,12 +1,14 @@
 #include <casting.h>
 
-t_ray	*new_ray(double x, double y, double rad)
+t_ray	*new_ray(double x, double y, double degs)
 {
 	t_ray	*out;
+	double	rads;
 
 	out = malloc(sizeof(t_ray));
-	out->pos = new_vector(x, y);
-	out->dir = new_vector(x + cos(rad), y + sin(rad));
+	out->pos = new_point(x, y);
+	rads = degs * DEG_TO_RAD_FACTOR;
+	out->dir = new_point(x + cos(rads), y + sin(rads));
 	return (out);
 }
 

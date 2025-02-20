@@ -55,6 +55,6 @@ t_point	*get_intersection(t_boundary *bound, t_ray *ray)
 	if (!(0 <= t && t <= denom))
 		return (0);
 	t = t / denom;
-	return (new_vector(bound->end1->x + t * (bound->end2->x - bound->end1->x),
+	return (new_point(bound->end1->x + t * (bound->end2->x - bound->end1->x),
 			bound->end1->y + t * (bound->end2->y - bound->end1->y)));
 }

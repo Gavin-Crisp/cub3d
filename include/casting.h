@@ -1,6 +1,7 @@
 #ifndef CASTING_H
 # define CASTING_H
 # include <math.h>
+# include "constants.h"
 
 typedef struct s_point
 {
@@ -20,15 +21,15 @@ typedef struct s_ray
 	t_point	*dir;
 }	t_ray;
 
-t_boundary	*new_boundary(double, double, double, double);
+t_boundary	*new_boundary(double x1, double y1, double x2, double y2);
 void		free_boundary(t_boundary *);
 
-t_ray		*new_ray(double, double, double);
+t_ray		*new_ray(double x, double y, double degs);
 void		free_ray(t_ray *);
 
-t_point	*new_vector(double, double);
+t_point		*new_point(double x, double y);
 
 int			has_intersection(t_boundary *bound, t_ray *ray);
-t_point	*get_intersection(t_boundary *bound, t_ray *ray);
+t_point		*get_intersection(t_boundary *bound, t_ray *ray);
 
 #endif
