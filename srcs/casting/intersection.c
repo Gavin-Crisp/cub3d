@@ -34,13 +34,11 @@ int	has_intersection(t_boundary *bound, t_ray *ray)
 	double	u;
 
 	u = get_u_numerator(bound, ray);
-	if (u <= 0)
+	if (0 > u)
 		return (0);
 	t = get_t_numerator(bound, ray);
 	denom = get_denominator(bound, ray);
-	if (t < 0 || t > denom)
-		return (0);
-	return (1);
+	return ((0 <= t && t <= denom));
 }
 
 t_point	*get_intersection(t_boundary *bound, t_ray *ray)
@@ -50,11 +48,11 @@ t_point	*get_intersection(t_boundary *bound, t_ray *ray)
 	double	u;
 
 	u = get_u_numerator(bound, ray);
-	if (u <= 0)
+	if (0 > u)
 		return (0);
 	t = get_t_numerator(bound, ray);
 	denom = get_denominator(bound, ray);
-	if (t < 0 || t > denom)
+	if (!(0 <= t && t <= denom))
 		return (0);
 	t = t / denom;
 	return (new_vector(bound->end1->x + t * (bound->end2->x - bound->end1->x),
