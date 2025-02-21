@@ -27,7 +27,7 @@ static double	get_t_numerator(t_boundary *bound, t_ray *ray)
 		((bound->end1->x - ray->pos->x)
 			* (bound->end1->y - ray->pos->y))
 		- ((bound->end1->y - bound->end2->y)
-				* (bound->end1->x - ray->pos->x)));
+			* (bound->end1->x - ray->pos->x)));
 }
 
 static double	get_denominator(t_boundary *bound, t_ray *ray)
