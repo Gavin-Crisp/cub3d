@@ -12,8 +12,12 @@
 
 #ifndef CONSTANTS_H
 # define CONSTANTS_H
-# define _USE_MATH_DEFINES
-# include <math.h>
-# define DEG_TO_RAD_FACTOR M_PI / 180
+# define DEG_TO_RAD_FACTOR 0.01745329251994329576
+# define ARROW_TURN_INTERVAL 18
+# define MOVE_SPEED 0.25
+# define RAY_COUNT 10
+# define FOV 360
+# define SCREEN_X 1920
+# define SCREEN_Y 1080
 
 #endif
