@@ -13,6 +13,7 @@
 #ifndef CASTING_H
 # define CASTING_H
 # include <math.h>
+# include <stdlib.h>
 # include "constants.h"
 
 typedef struct s_point
@@ -34,10 +35,10 @@ typedef struct s_ray
 }	t_ray;
 
 t_boundary	*new_boundary(double x1, double y1, double x2, double y2);
-void		free_boundary(t_boundary *);
+void		free_boundary(t_boundary *bound);
 
 t_ray		*new_ray(double x, double y, double degs);
-void		free_ray(t_ray *);
+void		free_ray(t_ray *ray);
 
 t_point		*new_point(double x, double y);
 
