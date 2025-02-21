@@ -6,13 +6,13 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:29 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/21 13:25:30 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:33:23 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <casting.h>
 
-t_boundary	*new_boundary(double x1, double y1, double x2, double y2)
+t_boundary	*new_boundary(float x1, float y1, float x2, float y2)
 {
 	t_boundary	*out;
 

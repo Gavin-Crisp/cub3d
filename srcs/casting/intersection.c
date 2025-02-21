@@ -6,13 +6,13 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:31 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/21 13:26:16 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:34:23 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "casting.h"
 
-static double	get_u_numerator(t_boundary *bound, t_ray *ray)
+static float	get_u_numerator(t_boundary *bound, t_ray *ray)
 {
 	return (
 		((bound->end1->y - bound->end2->y)
@@ -21,7 +21,7 @@ static double	get_u_numerator(t_boundary *bound, t_ray *ray)
 			* (bound->end1->y - ray->pos->y)));
 }
 
-static double	get_t_numerator(t_boundary *bound, t_ray *ray)
+static float	get_t_numerator(t_boundary *bound, t_ray *ray)
 {
 	return (
 		((bound->end1->x - ray->pos->x)
@@ -30,7 +30,7 @@ static double	get_t_numerator(t_boundary *bound, t_ray *ray)
 			* (bound->end1->x - ray->pos->x)));
 }
 
-static double	get_denominator(t_boundary *bound, t_ray *ray)
+static float	get_denominator(t_boundary *bound, t_ray *ray)
 {
 	return (
 		((bound->end1->x - bound->end2->x)
@@ -41,9 +41,9 @@ static double	get_denominator(t_boundary *bound, t_ray *ray)
 
 int	has_intersection(t_boundary *bound, t_ray *ray)
 {
-	double	t;
-	double	denom;
-	double	u;
+	float	t;
+	float	denom;
+	float	u;
 
 	u = get_u_numerator(bound, ray);
 	if (0 > u)
@@ -55,9 +55,9 @@ int	has_intersection(t_boundary *bound, t_ray *ray)
 
 t_point	*get_intersection(t_boundary *bound, t_ray *ray)
 {
-	double	t;
-	double	denom;
-	double	u;
+	float	t;
+	float	denom;
+	float	u;
 
 	u = get_u_numerator(bound, ray);
 	if (0 > u)
