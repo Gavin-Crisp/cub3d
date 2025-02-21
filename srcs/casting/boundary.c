@@ -24,7 +24,21 @@ t_boundary	*new_boundary(double x1, double y1, double x2, double y2)
 
 void	free_boundary(t_boundary *bound)
 {
+	if (!bound)
+		return ;
 	free(bound->end1);
 	free(bound->end2);
 	free(bound);
+}
+
+void	free_boundary_array(t_boundary *bounds, size_t num_bounds)
+{
+	if (!bounds)
+		return ;
+	while (num_bounds--)
+	{
+		free(bounds[num_bounds].end1);
+		free(bounds[num_bounds].end2);
+	}
+	free(bounds);
 }

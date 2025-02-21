@@ -36,6 +36,7 @@ typedef struct s_ray
 
 t_boundary	*new_boundary(double x1, double y1, double x2, double y2);
 void		free_boundary(t_boundary *bound);
+void		free_boundary_array(t_boundary *bounds, size_t num_bounds);
 
 t_ray		*new_ray(double x, double y, double degs);
 void		free_ray(t_ray *ray);

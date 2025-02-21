@@ -26,6 +26,8 @@ t_ray	*new_ray(double x, double y, double degs)
 
 void	free_ray(t_ray *ray)
 {
+	if (!ray)
+		return ;
 	free(ray->pos);
 	free(ray->dir);
 	free(ray);
