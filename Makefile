@@ -42,13 +42,20 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 -include $(DEPS)
 
 clean:
-	for f in $(dir $(LIBS_TARGET)); do $(MAKE) -C clean; done
-	rm -rfv $(BUILD_DIR)
+	$(MAKE) -C lib/libft clean
+	$(MAKE) -C lib/mlx_linux clean
+	rm -rf $(BUILD_DIR)
+	echo Cleaned cub3D
 
 fclean:
-	for f in $(dir $(LIBS_TARGET)); do $(MAKE) -C fclean; done
-	rm -rfv $(BUILD_DIR) $(NAME)
+	$(MAKE) -C lib/libft fclean
+	$(MAKE) -C lib/mlx_linux clean
+	rm -rf $(BUILD_DIR) $(NAME)
+	echo Fully cleaned cub3D
 
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 
-norm: ; norminette | grep -v OK
+norm: ; norminette srcs include lib/libft | grep -v OK || echo No problems found
+
