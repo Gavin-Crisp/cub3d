@@ -21,8 +21,7 @@ CPPFLAGS		= $(addprefix -I,$(INCLUDES)) -MT $@ -MMD -MP -MF $(DEP_DIR)/$*.d
 export LDFLAGS	:= $(addprefix -L,$(dir $(LIBS_TARGET))) -fsanitize=address
 export LDLIBS	:= $(addprefix -l,$(LIBS))
 
-.PHONY: all fclean clean re norm update
-.SILENT:
+MAKEFLAGS		+= --no-print-directory
 
 all: $(NAME)
 
@@ -59,3 +58,5 @@ re:
 
 norm: ; norminette srcs include lib/libft | grep -v OK || echo No problems found
 
+.PHONY: all fclean clean re norm update
+#.SILENT:
