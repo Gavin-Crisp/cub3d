@@ -6,12 +6,17 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:25:17 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/21 15:10:08 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:09:55 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLX_UTIL_H
 # define MLX_UTIL_H
+# include <stddef.h>
+# define WHITE 0xffffffff
+# define RED 0xffff0000
+# define GREEN 0xff00ff00
+# define BLUE 0xff0000ff
 
 typedef struct s_img
 {
@@ -33,6 +38,6 @@ unsigned char	colour_get_r(int col);
 unsigned char	colour_get_g(int col);
 unsigned char	colour_get_b(int col);
 
-void			put_pixel(t_img *img, int x, int y, int col);
+void			put_pixel(t_img *img, size_t x, size_t y, int col);
 
 #endif
