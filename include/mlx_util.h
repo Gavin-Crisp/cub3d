@@ -6,13 +6,15 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:25:17 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 15:09:55 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:39:02 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLX_UTIL_H
 # define MLX_UTIL_H
-# include <stddef.h>
+# include <stdlib.h>
+# include "mlx.h"
+# include "libft.h"
 # define WHITE 0xffffffff
 # define RED 0xffff0000
 # define GREEN 0xff00ff00
@@ -22,10 +24,17 @@ typedef struct s_img
 {
 	void	*img;
 	char	*addr;
-	int		bpp;
+	int		bytes_pp;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
+
+t_img	*new_image(void *mlx, int width, int height);
+t_img	*new_image_xpm(void *mlx, char *rel_path);
+void	*pixel_address(t_img *img, size_t x, size_t y);
+void	clear_image(t_img *img);
 
 int				trgb_to_colour(
 					unsigned char t,

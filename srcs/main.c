@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 13:59:17 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:39:16 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int	update_pos(int x, int y, void *param)
 	data = (t_data *)param;
 	data->map->player_pos->x = (double)(x / SCREEN_X);
 	data->map->player_pos->y = (double)(y / SCREEN_Y);
-	ft_bzero(data->img.addr, ((SCREEN_Y - 1) * data->img.line_length
-			+ (SCREEN_X - 1) * (data->img.bpp / 8)) - (size_t)data->img.addr);
+	clear_image(&data->img);
 	draw_2d_view(data->map, data->mlx, data->mlx_win, &data->img);
 	return (0);
 }
