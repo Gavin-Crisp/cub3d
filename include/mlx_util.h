@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:25:17 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 15:39:02 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:44:13 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
-t_img	*new_image(void *mlx, int width, int height);
-t_img	*new_image_xpm(void *mlx, char *rel_path);
-void	*pixel_address(t_img *img, size_t x, size_t y);
-void	clear_image(t_img *img);
+t_img			*new_image(void *mlx, int width, int height);
+t_img			*new_image_xpm(void *mlx, char *rel_path);
+void			*pixel_address(t_img *img, size_t x, size_t y);
+void			clear_image(t_img *img);
 
 int				trgb_to_colour(
 					unsigned char t,
 					unsigned char r,
 					unsigned char g,
 					unsigned char b
-				);
+					);
 unsigned char	colour_get_t(int col);
 unsigned char	colour_get_r(int col);
 unsigned char	colour_get_g(int col);

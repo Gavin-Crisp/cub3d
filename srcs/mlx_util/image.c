@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:18:48 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 15:38:27 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:43:22 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_img	*new_image(void *mlx, int width, int height)
 	out = malloc(sizeof(t_img));
 	out->img = mlx_new_image(mlx, width, height);
 	out->addr = mlx_get_data_addr(out->img, &out->bytes_pp, &out->line_length,
-		&out->endian);
+			&out->endian);
 	out->bytes_pp /= 8;
 	out->width = width;
 	out->height = height;
@@ -33,7 +33,7 @@ t_img	*new_image_xpm(void *mlx, char *rel_path)
 	out = malloc(sizeof(t_img));
 	out->img = mlx_xpm_file_to_image(mlx, rel_path, &out->width, &out->height);
 	out->addr = mlx_get_data_addr(out->img, &out->bytes_pp, &out->line_length,
-		&out->endian);
+			&out->endian);
 	out->bytes_pp /= 8;
 	return (out);
 }
