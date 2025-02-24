@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:26:47 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 12:48:58 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 13:08:59 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ t_point		**get_intersections(
 				t_ray *ray,
 				t_boundary *bounds,
 				size_t num_bounds);
+
+t_point		*get_closest_point(t_ray *ray, t_point **points);
 
 #endif
