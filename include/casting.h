@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:26:47 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/21 15:33:00 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:48:58 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void		free_ray(t_ray *ray);
 
 t_point		*new_point(float x, float y);
 
-int			has_intersection(t_boundary *bound, t_ray *ray);
-t_point		*get_intersection(t_boundary *bound, t_ray *ray);
+t_point		*get_intersection(t_ray *ray, t_boundary *bound);
+t_point		**get_intersections(
+				t_ray *ray,
+				t_boundary *bounds,
+				size_t num_bounds);
 
 #endif

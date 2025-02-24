@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:31 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/21 15:34:23 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:55:54 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,7 @@ static float	get_denominator(t_boundary *bound, t_ray *ray)
 			* (ray->pos->x - ray->dir->x)));
 }
 
-int	has_intersection(t_boundary *bound, t_ray *ray)
-{
-	float	t;
-	float	denom;
-	float	u;
-
-	u = get_u_numerator(bound, ray);
-	if (0 > u)
-		return (0);
-	t = get_t_numerator(bound, ray);
-	denom = get_denominator(bound, ray);
-	return ((0 <= t && t <= denom));
-}
-
-t_point	*get_intersection(t_boundary *bound, t_ray *ray)
+t_point	*get_intersection(t_ray *ray, t_boundary *bound)
 {
 	float	t;
 	float	denom;
@@ -69,4 +55,22 @@ t_point	*get_intersection(t_boundary *bound, t_ray *ray)
 	t = t / denom;
 	return (new_point(bound->end1->x + t * (bound->end2->x - bound->end1->x),
 			bound->end1->y + t * (bound->end2->y - bound->end1->y)));
+}
+
+t_point	**get_intersections(t_ray *ray, t_boundary *bounds, size_t num_bounds)
+{
+	size_t	i;
+	size_t	j;
+	t_point	**out;
+
+	i = 0;
+	j = 0;
+	out = ft_calloc(num_bounds, sizeof(t_point *));
+	while (i < num_bounds)
+	{
+		out[j] = get_intersection(ray, &bounds[i++]);
+		if (out[j])
+			j++;
+	}
+	return (out);
 }
