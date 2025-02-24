@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:31 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 12:55:54 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 14:11:00 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_point	**get_intersections(t_ray *ray, t_boundary *bounds, size_t num_bounds)
 
 	i = 0;
 	j = 0;
-	out = ft_calloc(num_bounds, sizeof(t_point *));
+	out = ft_calloc(num_bounds + 1, sizeof(t_point *));
 	while (i < num_bounds)
 	{
 		out[j] = get_intersection(ray, &bounds[i++]);

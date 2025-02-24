@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:27:00 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/21 15:37:38 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 14:36:32 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_map(t_map *map)
 {
 	if (!map)
 		return ;
-	free(map->player_pos)
-	free_boundary_array(map->bounds);
+	free(map->player_pos);
+	free_boundary_array(map->bounds, map->num_bounds);
 	free(map);
 }
