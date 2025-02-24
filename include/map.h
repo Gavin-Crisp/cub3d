@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:25:18 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/21 15:37:27 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 13:02:17 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ typedef struct s_map
 
 t_map	*new_map(float p_x, float p_y, t_boundary *bounds, size_t num_bounds);
 void	free_map(t_map *map);
+
+t_point	**cast(t_map *map);
 
 #endif
