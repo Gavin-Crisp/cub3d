@@ -3,7 +3,7 @@ NAME		:= $(notdir $(shell pwd))
 SRC_DIR		:= .
 SRCS		:= \
 	bzero calloc memchr memcmp \
-	memcpy memmove memset
+	memcpy memmove memset memswap
 SRCS		:= $(patsubst %,$(SRC_DIR)/ft_%.c,$(SRCS))
 
 ifndef BUILD_DIR
