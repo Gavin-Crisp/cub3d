@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 13:26:25 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/25 14:46:05 by gcrisp           ###   ########.fr       */
+/*   Created: 2025/02/25 14:31:48 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/02/25 14:43:33 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
-# define DEG_TO_RAD_FACTOR 0.01745329251994329576
-# define ARROW_TURN_STEP 18
-# define MOVE_SPEED 0.25
-# define RAY_COUNT 36
-# define FOV 360
-# define SCREEN_X 1920
-# define SCREEN_Y 1080
-# define DEBUG_INDENT "    "
+#ifndef DEBUG_H
+# define DEBUG_H
+# include <stdio.h>
+# include "casting.h"
+# include "constants.h"
+# include "libft.h"
+# include "map.h"
+
+void	debug_point(char *name, t_point *point, size_t indent);
+void	debug_boundary(char *name, t_boundary *bound, size_t indent);
+void	debug_map(char *name, t_map *map, size_t indent);
 
 #endif

@@ -6,17 +6,17 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 15:39:16 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:44:25 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "casting.h"
+#include "debug.h"
+#include "libft.h"
 #include "map.h"
 #include "mlx_util.h"
 #include "mlx.h"
-#include "libft.h"
-
-void	draw_2d_view(t_map *map, void *mlx, void *mlx_win, t_img *img);
+#include "render.h"
 
 static t_map	*get_map(void)
 {
@@ -44,19 +44,18 @@ int	update_pos(int x, int y, void *param)
 	data->map->player_pos->x = (double)(x / SCREEN_X);
 	data->map->player_pos->y = (double)(y / SCREEN_Y);
 	clear_image(&data->img);
-	draw_2d_view(data->map, data->mlx, data->mlx_win, &data->img);
+	render_2d(data->map,&data->img);
 	return (0);
 }
 
-int	main(int argc, char const **argv)
+int	main(void)
 {
 	void	*mlx;
 	void	*mlx_window;
 	t_data	data;
 
-	(void)argc;
-	(void)argv;
 	data.map = get_map();
+	debug_map("test_map", data.map, 0);
 	mlx = mlx_init();
 	mlx_window = mlx_new_window(mlx, SCREEN_X, SCREEN_Y, "Cub3D");
 	mlx_loop(mlx);
