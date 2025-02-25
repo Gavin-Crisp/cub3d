@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:25:17 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 15:44:13 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:15:00 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ unsigned char	colour_get_g(int col);
 unsigned char	colour_get_b(int col);
 
 void			put_pixel(t_img *img, size_t x, size_t y, int col);
+void			put_point(t_point *p, size_t size, int col, t_img *img);
+void			put_line(t_point *a, t_point *b, int col, t_img *img);
 
 #endif
