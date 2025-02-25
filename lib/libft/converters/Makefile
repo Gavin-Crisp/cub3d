@@ -3,7 +3,8 @@ NAME		:= $(notdir $(shell pwd))
 SRC_DIR		:= .
 SRCS		:= \
 	atod atoi atol itoa_base \
-	itoa uitoa_base uitoa ultoa_base
+	itoa uitoa_base uitoa ultoa_base \
+	ultoa
 SRCS		:= $(patsubst %,$(SRC_DIR)/ft_%.c,$(SRCS))
 
 ifndef BUILD_DIR

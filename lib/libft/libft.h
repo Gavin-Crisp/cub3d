@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:22:43 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 16:48:07 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:05:57 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ int			ft_toupper(int c);
 int			ft_atoi(const char *s);
 long		ft_atol(const char *s);
 double		ft_atod(const char *s);
-char		*ft_itoa(int n);
 char		*ft_itoa_base(int n, char *base);
-char		*ft_uitoa(unsigned int n);
+char		*ft_itoa(int n);
 char		*ft_uitoa_base(unsigned int n, char *base);
+char		*ft_uitoa(unsigned int n);
 char		*ft_ultoa_base(unsigned long n, char *base);
+char		*ft_ultoa(unsigned long n);
 
 // doubly_linked_list
 typedef struct s_dllist
