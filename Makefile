@@ -18,7 +18,7 @@ DEPS			:= $(patsubst %.o,%.d,$(OBJS))
 export CC		:= cc
 export CFLAGS	:= -Wall -Werror -Wextra -g
 CPPFLAGS		:= $(addprefix -I,$(INCLUDES)) -MMD -MP
-LDFLAGS			:= $(addprefix -L,$(dir $(LIBS_TARGET))) -fsanitize=address
+LDFLAGS			:= $(addprefix -L,$(dir $(LIBS_TARGET)))
 LDLIBS			:= $(addprefix -l,$(LIBS))
 
 MAKEFLAGS		+= --no-print-directory
@@ -69,6 +69,10 @@ re:
 	$(MAKE) all
 
 norm: ; norminette srcs include lib/libft | grep -v OK || echo "All good"
+
+run:
+	$(MAKE) all
+	./$(NAME)
 
 .PHONY: all fclean clean re norm update
 .SILENT:
