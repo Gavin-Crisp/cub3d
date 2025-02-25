@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:08:34 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/25 12:19:38 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/25 12:32:59 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_point	*snap_to_grid(t_point *p)
 {
-	return (new_point(round(p->x), round(p->y));
+	return (new_point(round(p->x), round(p->y)));
 }
 
 static void	put_hline(t_point *a, t_point *b, int col, t_img *img)
@@ -40,9 +40,29 @@ static void	put_hline(t_point *a, t_point *b, int col, t_img *img)
 
 static void	put_vline(t_point *a, t_point *b, int col, t_img *img)
 {
+	int		*addr;
+	size_t	i;
+	size_t	len;
+
+	if (a->y < b->y)
+	{
+		addr = pixel_address(img, a->x, a->y);
+		len = b->y - a->y;
+	}
+	else
+	{
+		addr = pixel_address(img, a->x, a->y);
+		len = b->y - a->y;
+	}
+	i = 0;
+	while (i++ < len)
+	{
+		*addr = col;
+		addr += img->line_length;
+	}
 }
 
-static void	put_line_helper(t_point *a, t_point *b, int *pdx, int *pdy)
+static void	put_line_helper(t_point *a, int *pdx, int *pdy)
 {
 	if (*pdx > *pdy)
 	{
@@ -63,7 +83,7 @@ static void	put_line_helper(t_point *a, t_point *b, int *pdx, int *pdy)
 void	put_line(t_point *a, t_point *b, int col, t_img *img)
 {
 	int	dx;
-	int dy;
+	int	dy;
 
 	a = snap_to_grid(a);
 	b = snap_to_grid(b);
@@ -76,6 +96,6 @@ void	put_line(t_point *a, t_point *b, int col, t_img *img)
 		put_pixel(img, a->x, a->y, col);
 		dx = b->x - a->x;
 		dy = b->y - a->y;
-		put_line_helper(a, b, &dx, &dy);
+		put_line_helper(a, &dx, &dy);
 	}			
 }

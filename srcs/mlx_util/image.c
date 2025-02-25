@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:18:48 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 15:43:22 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/25 12:33:45 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void	*pixel_address(t_img *img, size_t x, size_t y)
 
 void	clear_image(t_img *img)
 {
-	ft_bzero(img->addr,
-		pixel_address(img, img->width - 1, img->height - 1) - img->addr);
+	ft_bzero(img->addr, pixel_address(
+			img, img->width - 1, img->height - 1) - (void *)img->addr);
 }

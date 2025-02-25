@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:25:17 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 16:15:00 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/25 12:25:17 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include "mlx.h"
 # include "libft.h"
+# include "casting.h"
 # define WHITE 0xffffffff
 # define RED 0xffff0000
 # define GREEN 0xff00ff00
