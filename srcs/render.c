@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:58 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/25 12:42:36 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/27 13:17:00 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,30 @@ void	render_3d(t_map *map, t_img *img)
 	(void)img;
 }
 
+static int	side_to_col(t_intsct *intsct)
+{
+	if (intsct->side == NORTH)
+		return (GREEN);
+	else if (intsct->side == EAST)
+		return (YELLOW);
+	else if (intsct->side == SOUTH)
+		return (MAGENTA);
+	else
+		return (CYAN);
+}
+
 void	render_2d(t_map *map, t_img *img)
 {
-	t_point		**points;
+	t_intsct	**intscts;
 	t_boundary	*bound;
 	size_t		i;
 
-	points = cast(map);
-	i = 0;
-	while (points[i])
+	intscts = cast(map);
+	i = -1;
+	while (intscts[++i])
 	{
-		put_point(points[i], 20, trgb_to_colour(255, 255, 0, 0), img);
-		put_line(map->player_pos, points[i++], trgb_to_colour(122, 0, 0, 255),
-			img);
+		put_point(intscts[i]->pos, 20, side_to_col(intscts[i]), img);
+		put_line(map->player, intscts[i]->pos, side_to_col(intscts[i]), img);
 	}
 	i = 0;
 	while (i < map->num_bounds)

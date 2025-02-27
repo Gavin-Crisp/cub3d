@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:38:50 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/25 14:50:55 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/27 12:47:51 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static char	*make_indent(size_t indent)
 	return (out);
 }
 
-void	debug_point(char *name, t_point *point, size_t indent)
+void	debug_point(char *name, t_point point, size_t indent)
 {
-	printf("%st_point *%s: { x: %f, y: %f }\n",
-		make_indent(indent), name, point->x, point->y);
+	printf("%st_point %s: { x: %f, y: %f }\n",
+		make_indent(indent), name, point.x, point.y);
 }
 
 void	debug_boundary(char *name, t_boundary *bound, size_t indent)
@@ -49,7 +49,7 @@ void	debug_map(char *name, t_map *map, size_t indent)
 
 	ind = make_indent(indent);
 	printf("%st_map *%s: {\n", ind, name);
-	debug_point("player_pos", map->player_pos, indent + 1);
+	debug_point("player_pos", map->player, indent + 1);
 	printf("%s    float facing_dir: %f\n", ind, map->facing_dir);
 	printf("%s    t_boundary *bounds: {\n", ind);
 	i = 0;

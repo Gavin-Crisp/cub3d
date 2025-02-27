@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:25:17 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/25 12:25:17 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/27 13:10:12 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 # include "mlx.h"
 # include "libft.h"
 # include "casting.h"
-# define WHITE 0xffffffff
-# define RED 0xffff0000
-# define GREEN 0xff00ff00
-# define BLUE 0xff0000ff
+# define WHITE 0x00ffffff
+# define RED 0x00ff0000
+# define GREEN 0x0000ff00
+# define BLUE 0x000000ff
+# define YELLOW 0x00ffff00
+# define MAGENTA 0x00ff00ff
+# define CYAN 0x0000ffff
 
 typedef struct s_img
 {
@@ -49,7 +52,7 @@ unsigned char	colour_get_g(int col);
 unsigned char	colour_get_b(int col);
 
 void			put_pixel(t_img *img, size_t x, size_t y, int col);
-void			put_point(t_point *p, size_t size, int col, t_img *img);
-void			put_line(t_point *a, t_point *b, int col, t_img *img);
+void			put_point(t_point p, size_t size, int col, t_img *img);
+void			put_line(t_point a, t_point b, int col, t_img *img);
 
 #endif

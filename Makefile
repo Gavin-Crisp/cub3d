@@ -6,9 +6,8 @@ INCLUDES		:= include lib/libft/ lib/mlx_linux/
 
 SRC_DIR			:= srcs
 SRCS			:= $(addprefix $(SRC_DIR)/,main.c)
-SRCS			+= $(addprefix $(SRC_DIR)/,debug.c render.c)
-SRCS			+= $(addprefix $(SRC_DIR)/casting/,boundary.c intersection.c ray.c point.c get_closest.c)
-SRCS			+= $(addprefix $(SRC_DIR)/map/,cast.c map.c)
+SRCS			+= $(addprefix $(SRC_DIR)/,debug.c map.c render.c)
+SRCS			+= $(addprefix $(SRC_DIR)/casting/,structs.c intersection.c get_closest.c)
 SRCS			+= $(addprefix $(SRC_DIR)/mlx_util/,colour.c image.c put.c put_line.c)
 
 BUILD_DIR		:= .build

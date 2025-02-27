@@ -6,35 +6,35 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:09:12 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 14:29:41 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/27 13:00:36 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "casting.h"
 
-t_point	*get_closest_point(t_ray *ray, t_point **points)
+t_intsct	*get_closest_intsct(t_ray *ray, t_intsct **intscts)
 {
-	t_point	*closest;
-	size_t	i;
-	float	best_diff;
-	float	diff;
+	t_intsct	*closest;
+	size_t		i;
+	float		best_diff;
+	float		diff;
 
 	i = 0;
 	best_diff = 10000000000000.0f;
-	while (points[i])
+	while (intscts[i])
 	{
-		if (ray->pos->x == points[i]->x)
-			diff = fabsf(ray->pos->y - points[i]->y);
+		if (ray->pos.x == intscts[i]->pos.x)
+			diff = fabsf(ray->pos.y - intscts[i]->pos.y);
 		else
-			diff = fabsf(ray->pos->x - points[i]->y);
+			diff = fabsf(ray->pos.x - intscts[i]->pos.x);
 		if (diff < best_diff)
 		{
 			best_diff = diff;
 			free(closest);
-			closest = points[i++];
+			closest = intscts[i++];
 		}
 		else
-			free(points[i++]);
+			free(intscts[i++]);
 	}
 	return (closest);
 }
