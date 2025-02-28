@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:04:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/27 13:47:01 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/28 12:21:22 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	do_rect(t_point a, t_point b, int col, t_img *img)
 
 void	put_rect(t_point a, t_point b, int col, t_img *img)
 {
-	point_to_pixel_point(img, &a);
-	point_to_pixel_point(img, &b);
+	a = point_to_pixel_point(img, a);
+	b = point_to_pixel_point(img, b);
 	if (a.x == b.x || a.y == b.y)
 		return ;
 	if (a.x > b.x)
@@ -43,14 +43,15 @@ void	put_rect(t_point a, t_point b, int col, t_img *img)
 	do_rect(a, b, col, img);
 }
 
-void	put_hline(t_point a, size_t len, int col, t_img *img)
+void	put_hline(t_point s, size_t len, int col, t_img *img)
 {
+	t_point	a;
 	t_point	b;
 
 	if (!len)
 		return ;
-	point_to_pixel_point(img, &a);
-	b = (t_point){a.x + len, a.y + (LINE_STROKE - 1) / 2};
+	a = point_to_pixel_point(img, s);
+	b = (t_point){coord_transform(s.x + len), a.y + (LINE_STROKE - 1) / 2};
 	a.y -= (LINE_STROKE - 1) / 2;
 	if (a.y < 0)
 		a.y = 0;
@@ -61,14 +62,15 @@ void	put_hline(t_point a, size_t len, int col, t_img *img)
 	do_rect(a, b, col, img);
 }
 
-void	put_vline(t_point a, size_t len, int col, t_img *img)
+void	put_vline(t_point s, size_t len, int col, t_img *img)
 {
+	t_point	a;
 	t_point	b;
 
 	if (!len)
 		return ;
-	point_to_pixel_point(img, &a);
-	b = (t_point){a.x + (LINE_STROKE - 1) / 2, a.y + len};
+	a = point_to_pixel_point(img, s);
+	b = (t_point){a.x + (LINE_STROKE - 1) / 2, coord_transform(s.y + len)};
 	a.x -= (LINE_STROKE - 1) / 2;
 	if (a.x < 0)
 		a.x = 0;

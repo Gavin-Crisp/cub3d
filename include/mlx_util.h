@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:25:17 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/27 13:22:15 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/28 12:19:15 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ t_img			*new_image(void *mlx, int width, int height);
 t_img			*new_image_xpm(void *mlx, char *rel_path);
 void			*pixel_address(t_img *img, size_t x, size_t y);
 void			clear_image(t_img *img);
-void			point_to_pixel_point(t_img *img, t_point *p);
+
+t_point			point_to_pixel_point(t_img *img, t_point p);
+float			coord_transform(float f);
 
 int				trgb_to_colour(
 					unsigned char t,

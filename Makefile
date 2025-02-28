@@ -9,7 +9,7 @@ SRCS			:= $(addprefix $(SRC_DIR)/,main.c)
 SRCS			+= $(addprefix $(SRC_DIR)/,map.c render.c)
 SRCS			+= $(addprefix $(SRC_DIR)/casting/,get_closest.c intersection.c structs.c)
 SRCS			+= $(addprefix $(SRC_DIR)/debug/,boundary.c indent.c intsct.c map.c point.c)
-SRCS			+= $(addprefix $(SRC_DIR)/mlx_util/,colour.c hvline_rect.c image.c put.c put_line.c)
+SRCS			+= $(addprefix $(SRC_DIR)/mlx_util/,colour.c hvline_rect.c image.c put.c put_line.c to_pixel.c)
 
 BUILD_DIR		:= .build
 OBJS			:= $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))

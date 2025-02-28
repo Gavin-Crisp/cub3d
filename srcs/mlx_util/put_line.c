@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:08:34 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/27 15:35:48 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/28 12:30:52 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 static void	vstroke(t_point p, int col, t_img *img)
 {
 	int		*addr;
-	size_t	i;
+	size_t	height;
 
-	i = 0;
-	while (i++ < LINE_STROKE)
+	p.y -= (LINE_STROKE - 1) / 2;
+	if (p.y < 0)
+		p.y = 0;
+	height = img->height - p.y;
+	if (height > LINE_STROKE)
+		height = LINE_STROKE;
+	while (height--)
 	{
 		addr = pixel_address(img, p.x, p.y++);
 		*addr = col;
@@ -29,10 +34,17 @@ static void	hstroke(t_point p, int col, t_img *img)
 {
 	int		*addr;
 	size_t	i;
+	size_t	width;
 
 	i = 0;
+	p.x -= (LINE_STROKE - 1) / 2;
+	if (p.x < 0)
+		p.x = 0;
+	width = img->width - p.x;
+	if (width > LINE_STROKE)
+		width = LINE_STROKE;
 	addr = pixel_address(img, p.x, p.y);
-	while (i < LINE_STROKE)
+	while (i < width)
 		addr[i++] = col;
 }
 
@@ -98,7 +110,7 @@ void	put_line(t_point a, t_point b, int col, t_img *img)
 		return (put_vline(a, b.y - a.y, col, img));
 	else if (a.x == b.x)
 		return (put_vline(b, a.y - b.y, col, img));
-	point_to_pixel_point(img, &a);
-	point_to_pixel_point(img, &b);
+	a = point_to_pixel_point(img, a);
+	b = point_to_pixel_point(img, b);
 	do_line(a, b, col, img);
 }
