@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   boundary.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 13:26:25 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 11:36:33 by gcrisp           ###   ########.fr       */
+/*   Created: 2025/02/28 11:18:57 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/02/28 11:29:30 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
-# define DEG_TO_RAD_FACTOR 0.01745329251994329576
-# define ARROW_TURN_STEP 18
-# define MOVE_SPEED 0.25
-# define RAY_COUNT 36
-# define FOV 360
-# define SCREEN_X 1920
-# define SCREEN_Y 1080
-# define DEBUG_INDENT "    "
-# define LINE_STROKE 5 
+#include "debug.h"
 
-#endif
+void	debug_boundary(char *name, t_boundary *bound, size_t indent)
+{
+	print_indent(indent);
+	printf("t_boundary *%s: {\n", name);
+	indent++;
+	debug_point("end1", bound->end1, indent);
+	debug_point("end2", bound->end2, indent);
+	indent--;
+	print_indent(indent);
+	printf("}\n");
+}
