@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:26:25 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/25 14:46:05 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/27 11:56:08 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define FOV 360
 # define SCREEN_X 1920
 # define SCREEN_Y 1080
-# define DEBUG_INDENT "    "
+# define DEBUG_INDENT "   "
+# define LINE_STROKE 5 
 
 #endif

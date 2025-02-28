@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:08:34 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/27 13:02:38 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/27 13:43:18 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,14 @@ void	put_pixel(t_img *img, size_t x, size_t y, int col)
 	*(unsigned int *)pixel_address(img, x, y) = col;
 }
 
-static void	snap_to_grid(t_point *p)
-{
-	p->x = round(p->x);
-	p->y = round(p->y);
-}
-
 void	put_point(t_point p, size_t size, int col, t_img *img)
 {
-	int		*addr;
-	size_t	width;
-	size_t	height;
-	size_t	i;
-	size_t	j;
+	t_point	a;
+	t_point	b;
 
-	snap_to_grid(&p);
-	addr = pixel_address(img, p.x, p.y);
-	i = 0;
-	width = size;
-	height = size;
-	if (p.x + width > img->width)
-		width = img->width - p.x;
-	if (p.y + height > img->height)
-		height = img->height - p.y;
-	while (i < height)
-	{
-		j = 0;
-		while (j < width)
-			addr[j++] = col;
-		addr += img->line_length;
-	}
+	a.x = p.x - (size - 1) / 2;
+	a.y = p.y - (size - 1) / 2;
+	b.x = p.x + (size - 1) / 2;
+	b.y = p.y + (size - 1) / 2;
+	put_rect(a, b, col, img);
 }

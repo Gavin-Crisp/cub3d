@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/27 13:06:06 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/27 13:23:54 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_data
 	t_map	*map;
 	void	*mlx;
 	void	*mlx_win;
-	t_img	img;
+	t_img	*img;
 }	t_data;
 
 int	update_pos(int x, int y, void *param)
@@ -45,8 +45,8 @@ int	update_pos(int x, int y, void *param)
 	data = (t_data *)param;
 	data->map->player.x = (double)(x / SCREEN_X);
 	data->map->player.y = (double)(y / SCREEN_Y);
-	clear_image(&data->img);
-	render_2d(data->map, &data->img);
+	clear_image(data->img);
+	render_2d(data->map, data->img);
 	return (0);
 }
 
@@ -56,9 +56,13 @@ int	main(void)
 	void	*mlx_window;
 	t_data	data;
 
-	data.map = get_map();
-	debug_map("test_map", data.map, 0);
 	mlx = mlx_init();
 	mlx_window = mlx_new_window(mlx, SCREEN_X, SCREEN_Y, "Cub3D");
+	data.img = new_image(mlx, SCREEN_X, SCREEN_Y);
+	data.map = get_map();
+//	debug_map("map", data.map, 0);
+	put_line(new_point(150, 100), new_point(200, 100), BLUE, data.img);	
+	put_line(new_point(50, 100), new_point(150, 105), BLUE, data.img);	
+	mlx_put_image_to_window(mlx, mlx_window, data.img->img, 0, 0);
 	mlx_loop(mlx);
 }
