@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:27:00 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/27 12:48:10 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/28 13:29:16 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_intsct	**cast(t_map *map)
 	{
 		ray = new_ray((t_point){map->player.x, map->player.y},
 				ray_dir);
+		ray_dir += ray_step;
 		intscts[i++] = get_closest_intsct(ray,
 				get_intersections(ray, map->bounds, map->num_bounds));
 		free(ray);

@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:09:12 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/27 13:00:36 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/27 15:21:00 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_intsct	*get_closest_intsct(t_ray *ray, t_intsct **intscts)
 
 	i = 0;
 	best_diff = 10000000000000.0f;
+	closest = 0;
 	while (intscts[i])
 	{
 		if (ray->pos.x == intscts[i]->pos.x)

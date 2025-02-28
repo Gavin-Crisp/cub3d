@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:03:32 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 11:34:41 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/28 13:27:03 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	debug_intsct(char *name, t_intsct *intsct, size_t indent)
 	print_indent(indent);
 	if (intsct->side == NORTH)
 		printf("t_wall_side side: NORTH\n");
-	if (intsct->side == EAST)
+	else if (intsct->side == EAST)
 		printf("t_wall_side side: EAST\n");
-	if (intsct->side == SOUTH)
+	else if (intsct->side == SOUTH)
 		printf("t_wall_side side: SOUTH\n");
 	else
 		printf("t_wall_side side: WEST\n");
@@ -38,6 +38,8 @@ void	debug_intscts(char *name, t_intsct **intscts, size_t indent)
 	size_t	i;
 
 	print_indent(indent);
+	if (!intscts[0])
+		return ((void)printf("t_intsct **%s: { }\n", name));
 	printf("t_intsct **%s: {\n", name);
 	indent++;
 	i = 0;
