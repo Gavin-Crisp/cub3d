@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:25:17 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 12:19:15 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/28 15:33:56 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_img
 
 t_img			*new_image(void *mlx, int width, int height);
 t_img			*new_image_xpm(void *mlx, char *rel_path);
+void			free_image(t_img *img, void *mlx);
 void			*pixel_address(t_img *img, size_t x, size_t y);
 void			clear_image(t_img *img);
 
