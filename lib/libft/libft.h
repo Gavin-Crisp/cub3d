@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:22:43 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/25 14:05:57 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/13 13:34:32 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # define GNL_BUFFER_SIZE 50
-# define ALLOC_HEAP_CAPACITY 32768
-
-//allocator
-void		*ft_malloc(size_t size);
-void		ft_free(void *ptr);
-void		*ft_realloc(void *ptr, size_t new_size);
 
 // binary_tree
 typedef struct s_btree
@@ -154,6 +148,7 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t n);
 void		*ft_memset(void *b, int c, size_t len);
 void		ft_memswap(void *a, void *b, size_t n);
+void		*ft_simple_realloc(void *p, size_t old, size_t new);
 
 // string
 void		ft_strtoupper(char *s);
@@ -174,5 +169,43 @@ char		*ft_strnstr(const char *h, const char *n, size_t len);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strtrim(char const *s, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+
+// vector
+typedef struct s_vector
+{
+	void	*data;
+	size_t	length;
+	size_t	_capacity;
+	size_t	_elem_size;
+}	t_vector;
+
+int			ft_vecdelete(t_vector *vec, size_t index, void (*clear)(void *));
+void		ft_vecfor_each(t_vector *vec, void (*action)(void *, size_t));
+void		ft_vecfree(t_vector **pvec, void (*clear)(void *));
+void		*ft_vecindex(t_vector *vec, size_t index);
+int			ft_vecinsert_elems(
+				t_vector *vec,
+				void *elems,
+				size_t num_elems,
+				size_t index);
+int			ft_vecinsert(t_vector *vec, void *elem, size_t index);
+t_vector	*ft_vecmap(t_vector *vec, void *(*map)(void *, size_t));
+t_vector	*ft_vecnew_from_array(
+				void *elements,
+				size_t length,
+				size_t elem_size);
+t_vector	*ft_vecnew_from_func(
+				size_t length,
+				void *(*gen)(size_t),
+				size_t elem_size);
+t_vector	*ft_vecnew_with_capacity(size_t capacity, size_t elem_size);
+t_vector	*ft_vecnew(size_t elem_size);
+void		*ft_vecpop_elems(t_vector *vec, size_t num_elems);
+void		*ft_vecpop(t_vector *vec);
+int			ft_vec_push_elems(t_vector *vec, void *elems, size_t num_elems);
+int			ft_vecpush(t_vector *vec, void *elem);
+void		*ft_vecremove_elems(t_vector *vec, size_t index, size_t num_elems);
+void		*ft_vecremove(t_vector *vec, size_t index);
+void		ft_vecreserve(t_vector *vec, size_t num_elems);
 
 #endif

@@ -4,8 +4,9 @@ export ROOT			:= $(shell pwd)
 export BUILD_DIR	:= $(ROOT)/.build
 
 COMPONENTS			:= \
-	allocator binary_tree char converters \
-	doubly_linked_list linked_list memory string
+	binary_tree char converters \
+	doubly_linked_list linked_list memory string \
+	vector
 COMP_CHECKS			:= $(patsubst %,$(BUILD_DIR)/%/.finished_comp,$(COMPONENTS))
 
 export CC			?= cc
@@ -16,27 +17,39 @@ ARFLAGS				= -rcs
 
 MAKEFLAGS			+= --no-print-directory
 
+ifndef INDENT
+	export INDENT	:= 0
+else
+	export INDENT	:= $(shell echo $$(($(INDENT) + 1)))
+endif
+export INDENT_STYLE	?= "    "
+
+define print
+a=0; while [ $$a -lt $(INDENT) ]; do echo -n $(INDENT_STYLE); a=`expr $$a + 1`; done; echo $1
+endef
+
 all: $(NAME)
 
 $(NAME): $(COMP_CHECKS)
 	$(AR) $(ARFLAGS) $@ $(wildcard $(BUILD_DIR)/**/*.o)
-	echo CREATED $@
+	$(call print,CREATED $@)
 
 $(BUILD_DIR)/%/.finished_comp:
+	$(call print,$*)
 	$(MAKE) -C $*
 
 clean:
-	echo Cleaning libft...
-	for f in $(COMPONENTS); do $(MAKE) -C $$f clean; done
+	$(call print,Cleaning libft...)
+	for f in $(COMPONENTS); do $(call print,$$f); $(MAKE) -C $$f clean; done
 	rm -rf $(BUILD_DIR)
-	echo Done
+	$(call print,Done)
 
 fclean:
-	echo Fully cleaning libft...
-	for f in $(COMPONENTS); do $(MAKE) -C $$f clean; done
-	rm -rf $(BUILD_DIR) $(NAME)
-	echo REMOVED $(NAME)
-	echo Done
+	$(call print,Fully cleaning libft...)
+	for f in $(COMPONENTS); do $(call print,$$f); $(MAKE) -C $$f clean; done
+	rm -rf $(BUILD_DIR)
+	if [ -f $(NAME) ]; then rm $(NAME) && $(call print,REMOVED $(NAME)); fi
+	$(call print,Done)
 
 re:
 	$(MAKE) fclean

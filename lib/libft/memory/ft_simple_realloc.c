@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocator.h                                        :+:      :+:    :+:   */
+/*   ft_simple_realloc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 12:25:54 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 12:25:55 by gcrisp           ###   ########.fr       */
+/*   Created: 2025/03/13 13:30:50 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/13 13:56:35 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALLOCATOR_H
-# define ALLOCATOR_H
-# include "libft.h"
+#include "libft.h"
 
-typedef struct s_heap
+void	*ft_simple_realloc(void *p, size_t old, size_t new)
 {
-	t_dllist		*meta;
-	unsigned char	data[ALLOC_HEAP_CAPACITY];
-}	t_heap;
+	void	*out;
 
-typedef struct s_chunk
-{
-	void	*start;
-	size_t	size;
-	int		is_free;
-}	t_chunk;
-
-void		free_chunk(t_dllist **pchunks);
-
-t_heap		*get_heap(void);
-t_chunk		*new_heap_chunk(void *start, size_t size, int is_free);
-t_dllist	*find_chunk(void *ptr);
-
-#endif
+	out = malloc(new);
+	if (p)
+	{
+		if (new < old)
+			ft_memmove(out, p, new);
+		else
+			ft_memmove(out, p, old);
+		free(p);
+	}
+	return (out);
+}

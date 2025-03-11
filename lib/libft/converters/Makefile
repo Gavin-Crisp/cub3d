@@ -1,44 +1,21 @@
-NAME		:= $(notdir $(shell pwd))
+export NAME		:= $(notdir $(shell pwd))
 
-SRC_DIR		:= .
-SRCS		:= \
+export SRC_DIR	:= .
+SRCS			:= \
 	atod atoi atol itoa_base \
 	itoa uitoa_base uitoa ultoa_base \
 	ultoa
-SRCS		:= $(patsubst %,$(SRC_DIR)/ft_%.c,$(SRCS))
+export SRCS		:= $(patsubst %,$(SRC_DIR)/ft_%.c,$(SRCS))
 
-ifndef BUILD_DIR
-_BUILD_DIR	:= .build
-else
-_BUILD_DIR	:= $(BUILD_DIR)/$(NAME)
-endif
+export CPPFLAGS	:= -I $(ROOT) -MMD -MP
 
-OBJS		:= $(patsubst $(SRC_DIR)/%.c,$(_BUILD_DIR)/%.o,$(SRCS))
-DEPS		:= $(patsubst %.o,%.d,$(OBJS))
-
-CC			?= cc
-CFLAGS		?= -Wall -Wextra -Werror
-CPPFLAGS	:= -I $(ROOT) -MMD -MP
-
-all: .finished_comp
-
-.finished_comp: $(OBJS)
-	touch $(_BUILD_DIR)/.finished_comp
-
-$(_BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-	echo CREATED $(@F)
-
--include $(DEPS)
+all:
+	$(MAKE) -C $(ROOT) -f component.mk
 
 clean:
-	for f in $(OBJS); do if [ -f $$f ]; then rm $$f && echo "REMOVED $$(basename $$f)"; fi ; done
-	rm -rf $(_BUILD_DIR)
+	$(MAKE) -C $(ROOT) -f component.mk clean
 
-re:
-	$(MAKE) clean
-	$(MAKE) all
+re: clean all
 
 .PHONY: all clean re
 .SILENT:

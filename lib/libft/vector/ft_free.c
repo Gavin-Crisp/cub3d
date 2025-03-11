@@ -5,34 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 12:25:43 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 12:25:44 by gcrisp           ###   ########.fr       */
+/*   Created: 2025/03/03 10:30:37 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/13 13:30:34 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "allocator.h"
+#include "libft.h"
 
-void	free_chunk(t_dllist **pchunks)
+void	ft_vecfree(t_vector **pvec, void (*clear)(void *))
 {
-	ft_dllstremove_elem(pchunks, free);
-	if (((t_chunk *)(*pchunks)->data)->is_free
-		&& ((t_chunk *)(*pchunks)->prev->data)->is_free)
+	size_t	i;
+
+	if (clear)
 	{
-		((t_chunk *)(*pchunks)->prev->data)->size
-			+= ((t_chunk *)(*pchunks)->data)->size;
-		ft_dllstremove_elem(pchunks, free);
+		i = 0;
+		while (i < (*pvec)->length)
+			clear(ft_vecindex(*pvec, i++));
 	}
-	*pchunks = 0;
-}
-
-void	ft_free(void *ptr)
-{
-	t_dllist	*chunks;
-
-	if (!ptr)
-		return ;
-	chunks = find_chunk(ptr);
-	if (!chunks || ((t_chunk *)chunks->data)->is_free)
-		return ;
-	free_chunk(&chunks);
+	free((*pvec)->data);
+	free(*pvec);
+	*pvec = 0;
 }
