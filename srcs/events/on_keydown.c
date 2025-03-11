@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:02:01 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 16:14:05 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/28 16:28:34 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	on_move(t_point dir, t_edata *data)
 	return (0);
 }
 
-static int on_turn(float diff, t_edata *data)
+static int	on_turn(float diff, t_edata *data)
 {
 	data->map->facing_dir += diff;
 	data->render(data);

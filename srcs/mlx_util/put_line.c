@@ -6,13 +6,13 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:08:34 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 12:30:52 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/03 12:44:08 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_util.h"
 
-static void	vstroke(t_point p, int col, t_img *img)
+static void	vstroke(t_pixel p, int col, t_img *img)
 {
 	int		*addr;
 	size_t	height;
@@ -30,7 +30,7 @@ static void	vstroke(t_point p, int col, t_img *img)
 	}
 }
 
-static void	hstroke(t_point p, int col, t_img *img)
+static void	hstroke(t_pixel p, int col, t_img *img)
 {
 	int		*addr;
 	size_t	i;
@@ -48,7 +48,7 @@ static void	hstroke(t_point p, int col, t_img *img)
 		addr[i++] = col;
 }
 
-static void	put_line_helper(t_point *n, t_point b, float m, int steep)
+static void	put_line_helper(t_pixel *n, t_pixel b, float m, int steep)
 {
 	float	ndy;
 	float	ndx;
@@ -77,13 +77,13 @@ static void	put_line_helper(t_point *n, t_point b, float m, int steep)
 		n->y++;
 }
 
-static void	do_line(t_point a, t_point b, int col, t_img *img)
+static void	do_line(t_pixel a, t_pixel b, int col, t_img *img)
 {
 	float	dx;
 	float	dy;
 	float	m;
 	int		steep;
-	t_point	n;
+	t_pixel	n;
 
 	dx = b.x - a.x;
 	dy = b.y - a.y;
@@ -100,17 +100,15 @@ static void	do_line(t_point a, t_point b, int col, t_img *img)
 	}
 }
 
-void	put_line(t_point a, t_point b, int col, t_img *img)
+void	put_line(t_pixel a, t_pixel b, int col, t_img *img)
 {
 	if (a.x > b.x)
-		ft_memswap(&a, &b, sizeof(t_point));
+		ft_memswap(&a, &b, sizeof(t_pixel));
 	if (a.y == b.y)
 		return (put_hline(a, b.x - a.x, col, img));
 	if (a.x == b.x && a.y < b.y)
 		return (put_vline(a, b.y - a.y, col, img));
 	else if (a.x == b.x)
 		return (put_vline(b, a.y - b.y, col, img));
-	a = point_to_pixel_point(img, a);
-	b = point_to_pixel_point(img, b);
 	do_line(a, b, col, img);
 }

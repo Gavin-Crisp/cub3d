@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:09:12 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/27 15:21:00 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/28 16:24:54 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ t_intsct	*get_closest_intsct(t_ray *ray, t_intsct **intscts)
 		else
 			free(intscts[i++]);
 	}
+	free(intscts);
 	return (closest);
 }

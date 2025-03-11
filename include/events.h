@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:45:18 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 15:51:15 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/03 12:53:36 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 # include "mlx_util.h"
 # include "map.h"
 
-typedef struct s_edata t_edata;
+typedef struct s_edata	t_edata;
 struct s_edata
 {
 	void	*mlx;
 	void	*win;
-	t_img	*img;
+	t_img	*main_render;
+	t_img	*minimap;
 	t_map	*map;
 	void	(*render)(t_edata *data);
 };

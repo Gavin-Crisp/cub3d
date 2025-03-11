@@ -6,12 +6,11 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:58 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 15:06:09 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/11 15:10:42 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
-#include "debug.h"
 
 static int	side_to_col(t_intsct *intsct)
 {
@@ -25,27 +24,45 @@ static int	side_to_col(t_intsct *intsct)
 		return (CYAN);
 }
 
-void	render_3d(t_map *map, t_img *img)
+static size_t	get_rect_height(t_map *map, t_intsct *intsct, t_img *img)
 {
-	(void)map;
-	(void)img;
+	float	distance;
+
+	distance = hypotf(map->player.x - intsct->pos.x,
+					map->player.y - intsct->pos.y);
+	return (img->height
+		* fminf(1, 2 * atan2f(1, 2 * distance) / (FOV / 16 * 9 * DEG_TO_RAD_FACTOR)));
 }
 
-void	render_2d(t_map *map, t_img *img)
+void	render_3d(t_map *map, t_intsct **intscts, t_img *img)
 {
-	t_intsct	**intscts;
-	t_boundary	*bound;
+	size_t		i;
+	size_t		rect_left;
+	size_t		rect_width;
+	size_t		rect_height;
+
+	rect_left = (img->width % RAY_COUNT) / 2;
+	rect_width = img->width / RAY_COUNT;
+	i = 0;
+	while (intscts[i])
+	{
+		rect_height = get_rect_height(map, intscts[i], img);
+		put_rect((t_pixel){rect_left, (img->height - rect_height) / 2},
+			(t_pixel){rect_left + rect_width,
+			(img->height + rect_height) / 2 - 1},
+			side_to_col(intscts[i]), img);
+		rect_left += rect_width;
+		i++;
+	}
+}
+
+void	render_2d(t_map *map, t_intsct **intscts, t_img *img)
+{
 	size_t		i;
 
 	i = 0;
 	while (i < map->num_bounds)
-	{
-		bound = &map->bounds[i++];
-		put_line(bound->end1, bound->end2, WHITE, img);
-		put_point(bound->end1, 11, WHITE, img);
-		put_point(bound->end2, 11, WHITE, img);
-	}
-	intscts = cast(map);
+		put_boundary(&map->bounds[i++], WHITE, img);
 	i = 0;
 	while (intscts[i])
 	{

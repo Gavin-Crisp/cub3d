@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:27:00 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 13:29:16 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/11 14:04:18 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,17 @@ t_intsct	**cast(t_map *map)
 {
 	t_intsct	**intscts;
 	t_ray		*ray;
-	float		ray_step;
 	float		ray_dir;
 	size_t		i;
 
-	ray_step = FOV / RAY_COUNT;
 	ray_dir = map->facing_dir - FOV / 2;
 	i = 0;
-	intscts = ft_calloc(RAY_COUNT + 1, sizeof(t_intsct));
+	intscts = malloc(sizeof(t_intsct) * (RAY_COUNT + 1));
+	intscts[RAY_COUNT] = 0;
 	while (i < RAY_COUNT)
 	{
-		ray = new_ray((t_point){map->player.x, map->player.y},
-				ray_dir);
-		ray_dir += ray_step;
+		ray = new_ray(map->player, ray_dir);
+		ray_dir += (float)FOV / RAY_COUNT;
 		intscts[i++] = get_closest_intsct(ray,
 				get_intersections(ray, map->bounds, map->num_bounds));
 		free(ray);

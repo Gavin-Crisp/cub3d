@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:25:17 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 15:50:17 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/03 12:30:11 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,20 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
+typedef struct s_pixel
+{
+	size_t	x;
+	size_t	y;
+}	t_pixel;
+
 t_img			*new_image(void *mlx, int width, int height);
 t_img			*new_image_xpm(void *mlx, char *rel_path);
 void			free_img(t_img *img, void *mlx);
 void			*pixel_address(t_img *img, size_t x, size_t y);
 void			clear_image(t_img *img);
 
-t_point			point_to_pixel_point(t_img *img, t_point p);
-float			coord_transform(float f);
+t_pixel			point_to_pixel(t_img *img, t_point p);
+size_t			coord_transform(float f);
 
 int				trgb_to_colour(
 					unsigned char t,
@@ -55,13 +61,14 @@ unsigned char	colour_get_r(int col);
 unsigned char	colour_get_g(int col);
 unsigned char	colour_get_b(int col);
 
-void			put_pixel(t_img *img, size_t x, size_t y, int col);
+void			put_pixel(t_pixel p, int col, t_img *img);
 void			put_point(t_point p, size_t size, int col, t_img *img);
+void			put_boundary(t_boundary *bound, int col, t_img *img);
 
-void			put_line(t_point a, t_point b, int col, t_img *img);
+void			put_line(t_pixel a, t_pixel b, int col, t_img *img);
 
-void			put_rect(t_point a, t_point b, int col, t_img *img);
-void			put_hline(t_point p, size_t len, int col, t_img *img);
-void			put_vline(t_point p, size_t len, int col, t_img *img);
+void			put_rect(t_pixel a, t_pixel b, int col, t_img *img);
+void			put_hline(t_pixel p, size_t len, int col, t_img *img);
+void			put_vline(t_pixel p, size_t len, int col, t_img *img);
 
 #endif

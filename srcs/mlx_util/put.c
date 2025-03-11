@@ -6,18 +6,18 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:08:34 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 12:06:59 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/03 12:40:21 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_util.h"
 
-void	put_pixel(t_img *img, size_t x, size_t y, int col)
+void	put_pixel(t_pixel p, int col, t_img *img)
 {
-	*(unsigned int *)pixel_address(img, x, y) = col;
+	*(unsigned int *)pixel_address(img, p.x, p.y) = col;
 }
 
-void	do_point(t_point a, t_point b, int col, t_img *img)
+void	do_point(t_pixel a, t_pixel b, int col, t_img *img)
 {
 	size_t	width;
 	size_t	height;
@@ -37,21 +37,46 @@ void	do_point(t_point a, t_point b, int col, t_img *img)
 
 void	put_point(t_point p, size_t size, int col, t_img *img)
 {
-	t_point	a;
-	t_point	b;
+	t_pixel	a;
+	t_pixel	b;
 
-	p = point_to_pixel_point(img, p);
-	a.x = p.x - (size - 1) / 2;
-	a.y = p.y - (size - 1) / 2;
-	if (a.x < 0)
+	b = point_to_pixel(img, p);
+	a = point_to_pixel(img, p);
+	if (a.x < (size - 1) / 2)
 		a.x = 0;
-	if (a.y < 0)
+	else
+		a.x -= (size - 1) / 2;
+	if (a.y < (size - 1) / 2)
 		a.y = 0;
-	b.x = p.x + (size - 1) / 2;
-	b.y = p.y + (size - 1) / 2;
-	if (b.x >= img->width)
+	else
+		a.y -= (size - 1) / 2;
+	b.x += (size - 1) / 2;
+	b.y += (size - 1) / 2;
+	if (b.x >= (size_t)img->width)
 		b.x = img->width - 1;
-	if (b.y >= img->height)
+	if (b.y >= (size_t)img->height)
 		b.y = img->height - 1;
 	do_point(a, b, col, img);
+}
+
+void	put_boundary(t_boundary *bound, int col, t_img *img)
+{
+	t_pixel	end1;
+	t_pixel	end2;
+
+	put_point(bound->end1, 11, col, img);
+	put_point(bound->end2, 11, col, img);
+	end1 = point_to_pixel(img, bound->end1);
+	end2 = point_to_pixel(img, bound->end2);
+	if (end1.x == end2.x)
+	{
+		end1.x -= 2;
+		end2.x += 2;
+	}
+	else if (end1.y == end2.y)
+	{
+		end1.y -= 2;
+		end2.y += 2;
+	}
+	put_rect(end1, end2, col, img);
 }
