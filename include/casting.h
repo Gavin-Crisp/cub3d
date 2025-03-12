@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:26:47 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/12 14:47:09 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:53:05 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,15 @@ typedef enum e_wall_side
 typedef struct s_intsct
 {
 	t_point		pos;
-	t_wall_side	side;
 	float		angle;
+	t_wall_side	side;
+	float		uv;
 }	t_intsct;
 
 t_boundary	*new_boundary(t_point end1, t_point end2);
+float		b_length(t_boundary *bound);
 t_ray		*new_ray(t_point pos, float angle);
-t_intsct	*new_intsct(t_point pos, t_wall_side side, float angle);
+t_intsct	*new_intsct(t_point pos, float angle, t_wall_side side, float uv);
 
 t_intsct	*get_intersection(t_ray *ray, t_boundary *bound);
 t_intsct	**get_intersections(

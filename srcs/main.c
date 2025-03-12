@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/12 14:48:08 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:22:03 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_map	*get_map(void)
 {
 	t_map		*map;
 
-	map = new_map();
+	map = new_map(M_PI_2);
 	map->player = (t_point){3, 3};
 	map->facing_dir = -M_PI_2;
 	map->bounds = malloc(sizeof(t_boundary) * 16);

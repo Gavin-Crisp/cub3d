@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:31 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/11 14:06:38 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:52:38 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ t_intsct	*get_intersection(t_ray *ray, t_boundary *bound)
 		side = EAST;
 	return (new_intsct(
 			(t_point){bound->end1.x + t * (bound->end2.x - bound->end1.x),
-			bound->end1.y + t * (bound->end2.y - bound->end1.y)}, side,
-			ray->angle));
+			bound->end1.y + t * (bound->end2.y - bound->end1.y)}, ray->angle,
+			side, fmodf(t * b_length(bound), 1)));
 }
 
 t_intsct	**get_intersections(

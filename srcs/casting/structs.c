@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:29 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/12 14:47:28 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:55:02 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ t_boundary	*new_boundary(t_point end1, t_point end2)
 	return (out);
 }
 
+float	b_length(t_boundary *bound)
+{
+	if (bound->end1.x == bound->end2.x)
+		return (fabsf(bound->end1.y - bound->end2.y));
+	return (fabsf(bound->end1.x - bound->end2.x));
+}
+
 t_ray	*new_ray(t_point pos, float angle)
 {
 	t_ray	*out;
@@ -33,13 +40,14 @@ t_ray	*new_ray(t_point pos, float angle)
 	return (out);
 }
 
-t_intsct	*new_intsct(t_point pos, t_wall_side side, float angle)
+t_intsct	*new_intsct(t_point pos, float angle, t_wall_side side, float uv)
 {
 	t_intsct	*out;
 
 	out = malloc(sizeof(t_intsct));
 	out->pos = pos;
-	out->side = side;
 	out->angle = angle;
+	out->side = side;
+	out->uv = uv;
 	return (out);
 }

@@ -6,11 +6,12 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:02:01 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/12 15:03:15 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:34:50 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
+#include "stdio.h"
 
 static int	on_esc(t_edata *data)
 {
@@ -48,6 +49,17 @@ static int	on_turn(float dir, t_edata *data)
 	return (0);
 }
 
+static int adjust_fov(float dir, t_edata *data)
+{
+	data->map->fov += dir * FOV_INCREMENT;
+	if (data->map->fov < MIN_FOV)
+		data->map->fov = MIN_FOV;
+	else if (data->map->fov > MAX_FOV)
+		data->map->fov = MAX_FOV;
+	data->render(data);
+	return (0);
+}
+
 int	on_keydown(int key, t_edata *data)
 {
 	if (key == 119)
@@ -64,5 +76,9 @@ int	on_keydown(int key, t_edata *data)
 		on_turn(1, data);
 	else if (key == 65307)
 		return (on_esc(data));
+	else if (key == 65362)
+		return (adjust_fov(1, data));
+	else if (key == 65364)
+		return (adjust_fov(-1, data));
 	return (0);
 }
