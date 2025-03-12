@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:58 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/11 15:10:42 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:06:49 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ static size_t	get_rect_height(t_map *map, t_intsct *intsct, t_img *img)
 
 	distance = hypotf(map->player.x - intsct->pos.x,
 					map->player.y - intsct->pos.y);
+	distance *= cosf(fmodf(map->facing_dir - intsct->angle + M_PI * 2, M_PI * 2));
 	return (img->height
-		* fminf(1, 2 * atan2f(1, 2 * distance) / (FOV / 16 * 9 * DEG_TO_RAD_FACTOR)));
+		* fminf(1, 2 * atan2f(1, 2 * distance) / (FOV / 16 * 9)));
 }
 
 void	render_3d(t_map *map, t_intsct **intscts, t_img *img)
@@ -39,18 +40,23 @@ void	render_3d(t_map *map, t_intsct **intscts, t_img *img)
 	size_t		i;
 	size_t		rect_left;
 	size_t		rect_width;
-	size_t		rect_height;
+	size_t		wall_height;
 
 	rect_left = (img->width % RAY_COUNT) / 2;
 	rect_width = img->width / RAY_COUNT;
 	i = 0;
 	while (intscts[i])
 	{
-		rect_height = get_rect_height(map, intscts[i], img);
-		put_rect((t_pixel){rect_left, (img->height - rect_height) / 2},
+		wall_height = get_rect_height(map, intscts[i], img);
+		put_rect((t_pixel){rect_left, 0}, (t_pixel){rect_left + rect_width,
+				(img->height - wall_height) / 2}, map->ciel_colour, img);
+		put_rect((t_pixel){rect_left, (img->height - wall_height) / 2},
 			(t_pixel){rect_left + rect_width,
-			(img->height + rect_height) / 2 - 1},
+			(img->height + wall_height) / 2},
 			side_to_col(intscts[i]), img);
+		put_rect((t_pixel){rect_left, (img->height + wall_height) / 2},
+			(t_pixel){rect_left + rect_width, img->height},
+			map->floor_colour, img);
 		rect_left += rect_width;
 		i++;
 	}

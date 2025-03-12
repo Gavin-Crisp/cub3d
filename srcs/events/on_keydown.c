@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:02:01 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 16:28:34 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:03:15 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static int	on_move(t_point dir, t_edata *data)
 	move = (t_point){MOVE_SPEED, MOVE_SPEED};
 	if (!dir.x)
 	{
-		move.x *= dir.y * cos(data->map->facing_dir * DEG_TO_RAD_FACTOR);
-		move.y *= dir.y * sin(data->map->facing_dir * DEG_TO_RAD_FACTOR);
+		move.x *= dir.y * cos(data->map->facing_dir);
+		move.y *= dir.y * sin(data->map->facing_dir);
 	}
 	else
 	{
-		move.x *= dir.x * -1 * sin(data->map->facing_dir * DEG_TO_RAD_FACTOR);
-		move.y *= dir.x * cos(data->map->facing_dir * DEG_TO_RAD_FACTOR);
+		move.x *= dir.x * -1 * sin(data->map->facing_dir);
+		move.y *= dir.x * cos(data->map->facing_dir);
 	}
 	data->map->player.x += move.x;
 	data->map->player.y += move.y;
@@ -40,9 +40,10 @@ static int	on_move(t_point dir, t_edata *data)
 	return (0);
 }
 
-static int	on_turn(float diff, t_edata *data)
+static int	on_turn(float dir, t_edata *data)
 {
-	data->map->facing_dir += diff;
+	data->map->facing_dir += dir * TURN_SPEED + M_PI * 2;
+	data->map->facing_dir = fmodf(data->map->facing_dir, M_PI * 2);
 	data->render(data);
 	return (0);
 }
@@ -58,9 +59,9 @@ int	on_keydown(int key, t_edata *data)
 	else if (key == 100)
 		return (on_move((t_point){1, 0}, data));
 	else if (key == 65361)
-		on_turn(-TURN_SPEED, data);
+		on_turn(-1, data);
 	else if (key == 65363)
-		on_turn(TURN_SPEED, data);
+		on_turn(1, data);
 	else if (key == 65307)
 		return (on_esc(data));
 	return (0);

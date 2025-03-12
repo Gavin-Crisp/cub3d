@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:26:47 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/11 14:05:07 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 14:47:09 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_intsct
 }	t_intsct;
 
 t_boundary	*new_boundary(t_point end1, t_point end2);
-t_ray		*new_ray(t_point pos, float degs);
+t_ray		*new_ray(t_point pos, float angle);
 t_intsct	*new_intsct(t_point pos, t_wall_side side, float angle);
 
 t_intsct	*get_intersection(t_ray *ray, t_boundary *bound);

@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/11 14:09:37 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 14:48:08 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,31 @@
 
 static t_map	*get_map(void)
 {
-	t_boundary	*bounds;
 	t_map		*map;
 
-	bounds = malloc(sizeof(t_boundary) * 16);
-	bounds[0] = *new_boundary((t_point){1, 0}, (t_point){11, 0});
-	bounds[1] = *new_boundary((t_point){11, 0}, (t_point){11, 1});
-	bounds[2] = *new_boundary((t_point){11, 1}, (t_point){12, 1});
-	bounds[3] = *new_boundary((t_point){12, 1}, (t_point){12, 11});
-	bounds[4] = *new_boundary((t_point){12, 11}, (t_point){11, 11});
-	bounds[5] = *new_boundary((t_point){11, 11}, (t_point){11, 12});
-	bounds[6] = *new_boundary((t_point){11, 12}, (t_point){1, 12});
-	bounds[7] = *new_boundary((t_point){1, 12}, (t_point){1, 11});
-	bounds[8] = *new_boundary((t_point){1, 11}, (t_point){0, 11});
-	bounds[9] = *new_boundary((t_point){0, 11}, (t_point){0, 1});
-	bounds[10] = *new_boundary((t_point){0, 1}, (t_point){1, 1});
-	bounds[11] = *new_boundary((t_point){1, 1}, (t_point){1, 0});
-	bounds[12] = *new_boundary((t_point){5, 5}, (t_point){5, 7});
-	bounds[13] = *new_boundary((t_point){5, 7}, (t_point){7, 7});
-	bounds[14] = *new_boundary((t_point){7, 7}, (t_point){7, 5});
-	bounds[15] = *new_boundary((t_point){7, 5}, (t_point){5, 5});
-	map = new_map((t_point){1, 3}, bounds, 16);
-	map->facing_dir = -90;
+	map = new_map();
+	map->player = (t_point){3, 3};
+	map->facing_dir = -M_PI_2;
+	map->bounds = malloc(sizeof(t_boundary) * 16);
+	map->bounds[0] = *new_boundary((t_point){1, 0}, (t_point){11, 0});
+	map->bounds[1] = *new_boundary((t_point){11, 0}, (t_point){11, 1});
+	map->bounds[2] = *new_boundary((t_point){11, 1}, (t_point){12, 1});
+	map->bounds[3] = *new_boundary((t_point){12, 1}, (t_point){12, 11});
+	map->bounds[4] = *new_boundary((t_point){12, 11}, (t_point){11, 11});
+	map->bounds[5] = *new_boundary((t_point){11, 11}, (t_point){11, 12});
+	map->bounds[6] = *new_boundary((t_point){11, 12}, (t_point){1, 12});
+	map->bounds[7] = *new_boundary((t_point){1, 12}, (t_point){1, 11});
+	map->bounds[8] = *new_boundary((t_point){1, 11}, (t_point){0, 11});
+	map->bounds[9] = *new_boundary((t_point){0, 11}, (t_point){0, 1});
+	map->bounds[10] = *new_boundary((t_point){0, 1}, (t_point){1, 1});
+	map->bounds[11] = *new_boundary((t_point){1, 1}, (t_point){1, 0});
+	map->bounds[12] = *new_boundary((t_point){5, 5}, (t_point){5, 7});
+	map->bounds[13] = *new_boundary((t_point){5, 7}, (t_point){7, 7});
+	map->bounds[14] = *new_boundary((t_point){7, 7}, (t_point){7, 5});
+	map->bounds[15] = *new_boundary((t_point){7, 5}, (t_point){5, 5});
+	map->num_bounds = 16;
+	map->ciel_colour = WHITE;
+	map->floor_colour = RED;
 	return (map);
 }
 

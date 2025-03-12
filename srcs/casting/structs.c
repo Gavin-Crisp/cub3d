@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:29 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/11 14:06:51 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 14:47:28 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ t_boundary	*new_boundary(t_point end1, t_point end2)
 	return (out);
 }
 
-t_ray	*new_ray(t_point pos, float degs)
+t_ray	*new_ray(t_point pos, float angle)
 {
 	t_ray	*out;
 
 	out = malloc(sizeof(t_ray));
 	out->pos = pos;
-	out->angle = degs * DEG_TO_RAD_FACTOR;
+	out->angle = angle;
 	out->dir = (t_point){pos.x + cos(out->angle), pos.y + sin(out->angle)};
 	return (out);
 }
