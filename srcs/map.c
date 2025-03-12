@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:27:00 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/12 16:11:42 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 16:38:09 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	free_map(t_map *map)
 t_intsct	**cast(t_map *map)
 {
 	t_intsct	**intscts;
-	t_ray		*ray;
+	t_ray		ray;
 	float		ray_step;
 	float		ray_dir;
 	size_t		i;
@@ -55,11 +55,11 @@ t_intsct	**cast(t_map *map)
 	intscts[RAY_COUNT] = 0;
 	while (i < RAY_COUNT)
 	{
-		ray = new_ray(map->player, ray_dir);
+		ray = (t_ray){map->player, (t_point){map->player.x + cosf(ray_dir),
+			map->player.y + sinf(ray_dir)}, ray_dir};
 		ray_dir = fmodf(ray_dir + ray_step, M_PI * 2);
-		intscts[i++] = get_closest_intsct(ray,
-				get_intersections(ray, map->bounds, map->num_bounds));
-		free(ray);
+		intscts[i++] = get_closest_intsct(&ray,
+				get_intersections(&ray, map->bounds, map->num_bounds));
 	}
 	return (intscts);
 }

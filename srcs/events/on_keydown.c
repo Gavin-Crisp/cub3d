@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:02:01 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/12 15:34:50 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/12 16:39:23 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	on_turn(float dir, t_edata *data)
 	return (0);
 }
 
-static int adjust_fov(float dir, t_edata *data)
+static int	adjust_fov(float dir, t_edata *data)
 {
 	data->map->fov += dir * FOV_INCREMENT;
 	if (data->map->fov < MIN_FOV)
