@@ -6,13 +6,14 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:25:18 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/13 14:44:47 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/17 14:45:19 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
 # include <stdlib.h>
+# include <math.h>
 # include "casting.h"
 
 // wall_textures is arranged NESW
