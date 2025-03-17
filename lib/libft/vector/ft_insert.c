@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:30:42 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/13 15:18:09 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/17 11:54:20 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	expand_vec(t_vector *vec)
 
 	old_size = vec->_capacity * vec->_elem_size;
 	if (vec->_capacity == 0)
-		vec->_capacity = 1;
+		vec->_capacity = 4;
 	else
 		vec->_capacity *= 2;
 	vec->data = ft_simple_realloc(vec->data, old_size,

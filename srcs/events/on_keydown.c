@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:02:01 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/12 16:39:23 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/17 11:48:20 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static int	adjust_fov(float dir, t_edata *data)
 		data->map->fov = MIN_FOV;
 	else if (data->map->fov > MAX_FOV)
 		data->map->fov = MAX_FOV;
+	data->map->vfov = data->map->fov / 16 * 9;
 	data->render(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:26:47 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/12 15:53:05 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/13 14:04:27 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,7 @@ t_ray		*new_ray(t_point pos, float angle);
 t_intsct	*new_intsct(t_point pos, float angle, t_wall_side side, float uv);
 
 t_intsct	*get_intersection(t_ray *ray, t_boundary *bound);
-t_intsct	**get_intersections(
-				t_ray *ray,
-				t_boundary *bounds,
-				size_t num_bounds);
-
-t_intsct	*get_closest_intsct(t_ray *ray, t_intsct **intscts);
+t_vector	*get_intersections(t_ray *ray, t_vector *bounds);
+t_intsct	*get_closest_intsct(t_ray *ray, t_vector *intscts);
 
 #endif

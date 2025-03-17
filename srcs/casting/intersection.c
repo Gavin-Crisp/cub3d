@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:31 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/12 16:39:33 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/13 15:30:40 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_intsct	*get_intersection(t_ray *ray, t_boundary *bound)
 	denom = get_denominator(bound, ray);
 	t = get_t_numerator(bound, ray) / denom;
 	u = get_u_numerator(bound, ray) / denom;
-	if (0 > u)
+	if (!(0 <= u))
 		return (0);
 	if (!(0 <= t && t <= 1))
 		return (0);
@@ -62,23 +62,20 @@ t_intsct	*get_intersection(t_ray *ray, t_boundary *bound)
 		side, fmodf(t * b_length(bound), 1)));
 }
 
-t_intsct	**get_intersections(
-	t_ray *ray,
-	t_boundary *bounds,
-	size_t num_bounds)
+t_vector	*get_intersections(t_ray *ray, t_vector *bounds)
 {
 	size_t		i;
-	size_t		j;
-	t_intsct	**out;
+	t_vector	*out;
+	t_intsct	*intsct;
 
 	i = 0;
-	j = 0;
-	out = ft_calloc(num_bounds + 1, sizeof(t_intsct *));
-	while (i < num_bounds)
+	out = ft_vecnew(sizeof(t_intsct));
+	while (i < bounds->length)
 	{
-		out[j] = get_intersection(ray, &bounds[i++]);
-		if (out[j])
-			j++;
+		intsct = get_intersection(ray, ft_vecindex(bounds, i++));
+		if (intsct)
+			ft_vecpush(out, intsct);
+		free(intsct);
 	}
 	return (out);
 }

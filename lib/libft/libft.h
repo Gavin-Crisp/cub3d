@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:22:43 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/13 13:34:32 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/17 12:22:37 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ t_vector	*ft_vecnew_with_capacity(size_t capacity, size_t elem_size);
 t_vector	*ft_vecnew(size_t elem_size);
 void		*ft_vecpop_elems(t_vector *vec, size_t num_elems);
 void		*ft_vecpop(t_vector *vec);
+int			ft_vecpush_consume(t_vector *vec, void *elem);
 int			ft_vec_push_elems(t_vector *vec, void *elems, size_t num_elems);
 int			ft_vecpush(t_vector *vec, void *elem);
 void		*ft_vecremove_elems(t_vector *vec, size_t index, size_t num_elems);

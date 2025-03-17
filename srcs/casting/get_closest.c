@@ -6,37 +6,46 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:09:12 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 16:24:54 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/17 13:09:21 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "casting.h"
 
-t_intsct	*get_closest_intsct(t_ray *ray, t_intsct **intscts)
+static void	change_closest(
+	t_intsct **pclosest,
+	t_intsct *new_closest,
+	float *pbest_diff,
+	float diff)
+{
+	*pbest_diff = diff;
+	free(*pclosest);
+	*pclosest = new_closest;
+}
+
+t_intsct	*get_closest_intsct(t_ray *ray, t_vector *intscts)
 {
 	t_intsct	*closest;
 	size_t		i;
 	float		best_diff;
 	float		diff;
 
-	i = 0;
-	best_diff = 10000000000000.0f;
+	best_diff = INFINITY;
 	closest = 0;
-	while (intscts[i])
+	i = 0;
+	while (i < intscts->length)
 	{
-		if (ray->pos.x == intscts[i]->pos.x)
-			diff = fabsf(ray->pos.y - intscts[i]->pos.y);
+		if (ray->pos.x == ((t_intsct *)ft_vecindex(intscts, i))->pos.x)
+			diff = fabsf(ray->pos.y
+					- ((t_intsct *)ft_vecindex(intscts, i))->pos.y);
 		else
-			diff = fabsf(ray->pos.x - intscts[i]->pos.x);
+			diff = fabsf(ray->pos.x
+					- ((t_intsct *)ft_vecindex(intscts, i))->pos.x);
 		if (diff < best_diff)
-		{
-			best_diff = diff;
-			free(closest);
-			closest = intscts[i++];
-		}
+			change_closest(&closest, ft_vecremove(intscts, i),
+				&best_diff, diff);
 		else
-			free(intscts[i++]);
+			i++;
 	}
-	free(intscts);
 	return (closest);
 }

@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:18:48 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 15:48:32 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/13 15:31:44 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_img	*new_image_xpm(void *mlx, char *rel_path)
 void	free_img(t_img *img, void *mlx)
 {
 	mlx_destroy_image(mlx, img->img);
+	free(img);
 }
 
 void	*pixel_address(t_img *img, size_t x, size_t y)

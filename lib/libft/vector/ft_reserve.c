@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:31:21 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/13 13:40:40 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/17 12:19:22 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	ft_vecreserve(t_vector *vec, size_t num_elements)
 	old_size = vec->_capacity * vec->_elem_size;
 	vec->_capacity = next_highest_p2(vec->_capacity + num_elements);
 	vec->data = ft_simple_realloc(vec->data, old_size,
-		vec->_capacity * vec->_elem_size);
+			vec->_capacity * vec->_elem_size);
 }

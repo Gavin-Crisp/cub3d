@@ -4,9 +4,8 @@ export ROOT			:= $(shell pwd)
 export BUILD_DIR	:= $(ROOT)/.build
 
 COMPONENTS			:= \
-	binary_tree char converters \
-	doubly_linked_list linked_list memory string \
-	vector
+	binary_tree char converters doubly_linked_list \
+	linked_list memory string vector
 COMP_CHECKS			:= $(patsubst %,$(BUILD_DIR)/%/.finished_comp,$(COMPONENTS))
 
 export CC			?= cc
@@ -51,9 +50,7 @@ fclean:
 	if [ -f $(NAME) ]; then rm $(NAME) && $(call print,REMOVED $(NAME)); fi
 	$(call print,Done)
 
-re:
-	$(MAKE) fclean
-	$(MAKE) all
+re: fclean all
 
 norm: ; norminette | grep -v OK || echo "All good"
 
