@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:31 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/13 15:30:40 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/17 15:31:09 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,4 @@ t_intsct	*get_intersection(t_ray *ray, t_boundary *bound)
 			(t_point){bound->end1.x + t * (bound->end2.x - bound->end1.x),
 			bound->end1.y + t * (bound->end2.y - bound->end1.y)}, ray->angle,
 		side, fmodf(t * b_length(bound), 1)));
-}
-
-t_vector	*get_intersections(t_ray *ray, t_vector *bounds)
-{
-	size_t		i;
-	t_vector	*out;
-	t_intsct	*intsct;
-
-	i = 0;
-	out = ft_vecnew(sizeof(t_intsct));
-	while (i < bounds->length)
-	{
-		intsct = get_intersection(ray, ft_vecindex(bounds, i++));
-		if (intsct)
-			ft_vecpush(out, intsct);
-		free(intsct);
-	}
-	return (out);
 }

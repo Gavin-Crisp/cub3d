@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 13:33:01 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/17 14:59:04 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/17 15:48:48 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_ray	*get_rays(t_map *map, size_t ray_count)
 	t_point		step;
 	t_ray		*rays;
 	size_t		i;
-	float	theta;
+	float		theta;
 
 	target = a_to_p(map->player,
 			fmodf(map->facing_dir - map->fov / 2 + M_PI * 2, M_PI * 2));
@@ -53,7 +53,6 @@ static t_ray	*get_rays(t_map *map, size_t ray_count)
 t_vector	*cast(t_map *map)
 {
 	t_vector	*closest_intscts;
-	t_vector	*ray_intscts;
 	t_intsct	*closest;
 	t_ray		*rays;
 	size_t		i;
@@ -63,12 +62,11 @@ t_vector	*cast(t_map *map)
 	i = 0;
 	while (i < RAY_COUNT)
 	{
-		ray_intscts = get_intersections(&rays[i], map->bounds);
-		closest = get_closest_intsct(&rays[i], ray_intscts);
-		ft_vecfree(&ray_intscts, 0);
+		closest = get_closest_intsct(&rays[i], map->bounds);
 		if (closest)
 			ft_vecpush_consume(closest_intscts, closest);
 		i++;
 	}
+	free(rays);
 	return (closest_intscts);
 }

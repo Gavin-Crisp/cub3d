@@ -6,26 +6,23 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:09:12 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/17 13:09:21 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/17 15:49:13 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "casting.h"
 
-static void	change_closest(
-	t_intsct **pclosest,
-	t_intsct *new_closest,
-	float *pbest_diff,
-	float diff)
+static float	get_diff(t_ray *ray, t_intsct *intsct)
 {
-	*pbest_diff = diff;
-	free(*pclosest);
-	*pclosest = new_closest;
+	if (ray->pos.x == intsct->pos.x)
+		return (fabsf(ray->pos.y - intsct->pos.y));
+	return (fabsf(ray->pos.x - intsct->pos.x));
 }
 
-t_intsct	*get_closest_intsct(t_ray *ray, t_vector *intscts)
+t_intsct	*get_closest_intsct(t_ray *ray, t_vector *bounds)
 {
 	t_intsct	*closest;
+	t_intsct	*new;
 	size_t		i;
 	float		best_diff;
 	float		diff;
@@ -33,19 +30,20 @@ t_intsct	*get_closest_intsct(t_ray *ray, t_vector *intscts)
 	best_diff = INFINITY;
 	closest = 0;
 	i = 0;
-	while (i < intscts->length)
+	while (i < bounds->length)
 	{
-		if (ray->pos.x == ((t_intsct *)ft_vecindex(intscts, i))->pos.x)
-			diff = fabsf(ray->pos.y
-					- ((t_intsct *)ft_vecindex(intscts, i))->pos.y);
-		else
-			diff = fabsf(ray->pos.x
-					- ((t_intsct *)ft_vecindex(intscts, i))->pos.x);
+		new = get_intersection(ray, ft_vecindex(bounds, i++));
+		if (!new)
+			continue ;
+		diff = get_diff(ray, new);
 		if (diff < best_diff)
-			change_closest(&closest, ft_vecremove(intscts, i),
-				&best_diff, diff);
+		{
+			best_diff = diff;
+			free(closest);
+			closest = new;
+		}
 		else
-			i++;
+			free(new);
 	}
 	return (closest);
 }

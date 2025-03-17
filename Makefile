@@ -18,10 +18,17 @@ OBJS			:= $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 DEPS			:= $(patsubst %.o,%.d,$(OBJS))
 
 export CC		:= cc
-export CFLAGS	:= -Wall -Werror -Wextra -g# -fsanitize=address
+CFLAGS			:= -Wall -Werror -Wextra
 CPPFLAGS		:= $(addprefix -I,$(INCLUDES)) -MMD -MP
-LDFLAGS			:= $(addprefix -L,$(dir $(LIBS_TARGET)))# -fsanitize=address
+LDFLAGS			:= $(addprefix -L,$(dir $(LIBS_TARGET)))
 LDLIBS			:= $(addprefix -l,$(LIBS))
+
+CFLAGS			+= -g
+
+# CFLAGS			+= -fsanitize=address
+# LDFLAGS			+= -fsanitize=address
+
+export CFLAGS
 
 MAKEFLAGS		+= --no-print-directory
 

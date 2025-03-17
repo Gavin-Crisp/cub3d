@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/17 13:17:50 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/17 15:23:23 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,22 @@ static t_map	*temp_get_map(void)
 	map = new_map();
 	map->player = (t_point){1, 3};
 	map->facing_dir = 0;
-	ft_vecpush_consume(map->bounds, new_boundary((t_point){0, 0}, (t_point){0, 6}));
-	ft_vecpush_consume(map->bounds, new_boundary((t_point){0, 6}, (t_point){6, 6}));
-	ft_vecpush_consume(map->bounds, new_boundary((t_point){6, 6}, (t_point){6, 0}));
-	ft_vecpush_consume(map->bounds, new_boundary((t_point){6, 0}, (t_point){0, 0}));
-	ft_vecpush_consume(map->bounds, new_boundary((t_point){2, 2}, (t_point){2, 4}));
-	ft_vecpush_consume(map->bounds, new_boundary((t_point){2, 4}, (t_point){4, 4}));
-	ft_vecpush_consume(map->bounds, new_boundary((t_point){4, 4}, (t_point){4, 2}));
-	ft_vecpush_consume(map->bounds, new_boundary((t_point){4, 2}, (t_point){2, 2}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){0, 1}, (t_point){0, 11}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){0, 11}, (t_point){1, 11}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){1, 11}, (t_point){1, 12}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){1, 12}, (t_point){11, 12}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){11, 12}, (t_point){11, 11}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){11, 11}, (t_point){12, 11}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){12, 11}, (t_point){12, 1}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){12, 1}, (t_point){11, 1}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){11, 1}, (t_point){11, 0}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){11, 0}, (t_point){1, 0}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){1, 0}, (t_point){1, 1}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){1, 1}, (t_point){0, 1}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){5, 5}, (t_point){5, 7}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){5, 7}, (t_point){7, 7}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){7, 7}, (t_point){7, 5}));
+	ft_vecpush_consume(map->bounds, new_boundary((t_point){7, 5}, (t_point){5, 5}));
 	map->ciel_colour = WHITE;
 	map->floor_colour = RED;
 	return (map);
