@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_new_with_capacity.c                             :+:      :+:    :+:   */
+/*   ft_reserve_exact.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 10:31:02 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/19 14:05:35 by gcrisp           ###   ########.fr       */
+/*   Created: 2025/03/19 14:00:53 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/19 14:21:53 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_vector	*ft_vecnew_with_capacity(size_t capacity, size_t elem_size)
+void	ft_vecreserve_exact(t_vector *vec, size_t num_elems)
 {
-	t_vector	*out;
+	size_t	old_size;
 
-	out = malloc(sizeof(t_vector));
-	out->_elem_size = elem_size;
-	out->length = 0;
-	out->_capacity = capacity;
-	out->data = malloc(out->_capacity * out->_elem_size);
-	return (out);
+	if (vec->length + num_elems <= vec->_capacity)
+		return ;
+	old_size = vec->_capacity * vec->_elem_size;
+	vec->_capacity = num_elems;
+	vec->data = ft_simple_realloc(vec->data, old_size,
+			vec->_capacity * vec->_elem_size);
 }
