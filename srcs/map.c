@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.c                                           :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:27:00 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/17 13:34:33 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 11:14:49 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@ t_map	*new_map(void)
 	t_map	*out;
 
 	out = malloc(sizeof(t_map));
-	out->player = (t_point){0, 0};
-	out->facing_dir = 0;
-	out->fov = M_PI_2;
-	out->vfov = M_PI_2 / 16 * 9;
+	out->player_start = (t_point){0, 0};
+	out->start_dir = 0;
 	out->bounds = ft_vecnew(sizeof(t_boundary));
-	out->wall_textures[0] = 0;
-	out->wall_textures[1] = 0;
-	out->wall_textures[2] = 0;
-	out->wall_textures[3] = 0;
+	out->wall_paths[NORTH] = 0;
+	out->wall_paths[EAST] = 0;
+	out->wall_paths[SOUTH] = 0;
+	out->wall_paths[WEST] = 0;
 	out->ciel_colour = 0;
 	out->floor_colour = 0;
 	return (out);
@@ -35,6 +33,11 @@ void	free_map(t_map *map)
 {
 	if (!map)
 		return ;
-	ft_vecfree(&map->bounds, 0);
+	if (map->bounds)
+		ft_vecfree(&map->bounds, 0);
+	free(map->wall_paths[NORTH]);
+	free(map->wall_paths[EAST]);
+	free(map->wall_paths[SOUTH]);
+	free(map->wall_paths[WEST]);
 	free(map);
 }

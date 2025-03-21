@@ -5,13 +5,15 @@ LIBS_TARGET		:= lib/libft/libft.a lib/mlx_linux/libmlx_Linux.a
 INCLUDES		:= include lib/libft/ lib/mlx_linux/
 
 SRC_DIR			:= srcs
-SRCS			:= $(addprefix $(SRC_DIR)/,main.c)
-SRCS			+= $(addprefix $(SRC_DIR)/,render.c)
-SRCS			+= $(addprefix $(SRC_DIR)/casting/,get_closest.c intersection.c structs.c)
-SRCS			+= $(addprefix $(SRC_DIR)/debug/,boundary.c indent.c intsct.c map.c point.c)
-SRCS			+= $(addprefix $(SRC_DIR)/events/,edata.c on_destroy.c on_keydown.c)
-SRCS			+= $(addprefix $(SRC_DIR)/map/, struct.c cast.c)
-SRCS			+= $(addprefix $(SRC_DIR)/mlx_util/,colour.c hvline_rect.c image.c put.c put_line.c to_pixel.c)
+SRCS			:= $(addprefix $(SRC_DIR)/,main)
+SRCS			+= $(addprefix $(SRC_DIR)/,map)
+SRCS			+= $(addprefix $(SRC_DIR)/casting/,cast get_rays intersection structs)
+SRCS			+= $(addprefix $(SRC_DIR)/debug/,boundary intsct map point)
+SRCS			+= $(addprefix $(SRC_DIR)/events/,edata on_destroy on_keydown)
+SRCS			+= $(addprefix $(SRC_DIR)/mlx_util/,colour hvline_rect image put put_line to_pixel)
+SRCS			+= $(addprefix $(SRC_DIR)/render/,2d 3d rd)
+
+SRCS			:= $(addsuffix .c,$(SRCS))
 
 BUILD_DIR		:= .build
 OBJS			:= $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
@@ -25,14 +27,14 @@ LDLIBS			:= $(addprefix -l,$(LIBS))
 
 CFLAGS			+= -g
 
-# CFLAGS			+= -fsanitize=address
-# LDFLAGS			+= -fsanitize=address
+#CFLAGS			+= -fsanitize=address
+#LDFLAGS			+= -fsanitize=address
 
 export CFLAGS
 
 MAKEFLAGS		+= --no-print-directory
 
-INDENT			:= 0
+export INDENT	:= 0
 
 all: $(NAME)
 
@@ -52,7 +54,6 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	$(MAKE) -C lib/libft clean
-	$(MAKE) -C lib/mlx_linux clean
 	for f in $(OBJS); \
 	do \
 		if [ -f $$f ]; \
@@ -73,7 +74,10 @@ fclean:
 		fi; \
 	done
 	rm -rf $(BUILD_DIR)
-	rm -fv $(NAME)
+	if [ -f $(NAME) ]; \
+	then \
+		rm $(NAME) && echo "REMOVED $(NAME)"; \
+	fi
 
 re:
 	$(MAKE) fclean
@@ -81,9 +85,11 @@ re:
 
 norm: ; norminette srcs include lib/libft | grep -v OK || echo "All good"
 
-run:
-	$(MAKE) $(NAME)
+run: $(NAME)
 	./$(NAME)
 
-.PHONY: all fclean clean re norm update
+debug: $(NAME)
+	lldb $(NAME)
+
+.PHONY: all fclean clean re norm debug
 .SILENT:

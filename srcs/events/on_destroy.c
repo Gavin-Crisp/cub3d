@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:49:00 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 15:50:55 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/19 15:51:44 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	on_destroy(t_edata *data)
 {
-	free_edata(data);
+	clear_edata(data);
 	exit(0);
 	return (1);
 }

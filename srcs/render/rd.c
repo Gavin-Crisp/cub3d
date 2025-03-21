@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   indent.c                                           :+:      :+:    :+:   */
+/*   rd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 10:59:25 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 11:02:53 by gcrisp           ###   ########.fr       */
+/*   Created: 2025/03/19 15:20:58 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/21 11:03:46 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
+#include "render.h"
 
-void	print_indent(size_t indent)
+void	init_rd(t_rend *rd, void *mlx, t_map *map)
 {
-	while (indent--)
-		printf(DEBUG_INDENT);
+	rd->walls[NORTH] = new_image_xpm(mlx, map->wall_paths[NORTH]);
+	rd->walls[EAST] = new_image_xpm(mlx, map->wall_paths[EAST]);
+	rd->walls[SOUTH] = new_image_xpm(mlx, map->wall_paths[SOUTH]);
+	rd->walls[WEST] = new_image_xpm(mlx, map->wall_paths[WEST]);
+	rd->ciel = map->ciel_colour;
+	rd->floor = map->floor_colour;
 }

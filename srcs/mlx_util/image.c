@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:18:48 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/13 15:31:44 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/19 15:25:43 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_img	*new_image_xpm(void *mlx, char *rel_path)
 
 	out = malloc(sizeof(t_img));
 	out->img = mlx_xpm_file_to_image(mlx, rel_path, &out->width, &out->height);
+	if (!out)
+		return (0);
 	out->addr = mlx_get_data_addr(out->img, &out->bytes_pp, &out->line_length,
 			&out->endian);
 	out->bytes_pp /= 8;

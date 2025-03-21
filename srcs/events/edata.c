@@ -6,15 +6,19 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:30:26 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/13 15:33:07 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 11:19:57 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 
-void	free_edata(t_edata *data)
+void	clear_edata(t_edata *data)
 {
-	free_map(data->map);
+	ft_vecfree(&data->cam.bounds, 0);
+	free_img(data->rd.walls[NORTH], data->mlx);
+	free_img(data->rd.walls[EAST], data->mlx);
+	free_img(data->rd.walls[SOUTH], data->mlx);
+	free_img(data->rd.walls[WEST], data->mlx);
 	free_img(data->main_render, data->mlx);
 	free_img(data->minimap, data->mlx);
 	mlx_destroy_window(data->mlx, data->win);

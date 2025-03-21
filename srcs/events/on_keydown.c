@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:02:01 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/17 11:48:20 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/19 15:52:18 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	on_esc(t_edata *data)
 {
-	free_edata(data);
+	clear_edata(data);
 	exit(0);
 	return (1);
 }
@@ -27,36 +27,36 @@ static int	on_move(t_point dir, t_edata *data)
 	move = (t_point){MOVE_SPEED, MOVE_SPEED};
 	if (!dir.x)
 	{
-		move.x *= dir.y * cos(data->map->facing_dir);
-		move.y *= dir.y * sin(data->map->facing_dir);
+		move.x *= dir.y * cos(data->cam.dir);
+		move.y *= dir.y * sin(data->cam.dir);
 	}
 	else
 	{
-		move.x *= dir.x * -1 * sin(data->map->facing_dir);
-		move.y *= dir.x * cos(data->map->facing_dir);
+		move.x *= dir.x * -1 * sin(data->cam.dir);
+		move.y *= dir.x * cos(data->cam.dir);
 	}
-	data->map->player.x += move.x;
-	data->map->player.y += move.y;
+	data->cam.pos.x += move.x;
+	data->cam.pos.y += move.y;
 	data->render(data);
 	return (0);
 }
 
 static int	on_turn(float dir, t_edata *data)
 {
-	data->map->facing_dir += dir * TURN_SPEED + M_PI * 2;
-	data->map->facing_dir = fmodf(data->map->facing_dir, M_PI * 2);
+	data->cam.dir += dir * TURN_SPEED + M_PI * 2;
+	data->cam.dir = fmodf(data->cam.dir, M_PI * 2);
 	data->render(data);
 	return (0);
 }
 
 static int	adjust_fov(float dir, t_edata *data)
 {
-	data->map->fov += dir * FOV_INCREMENT;
-	if (data->map->fov < MIN_FOV)
-		data->map->fov = MIN_FOV;
-	else if (data->map->fov > MAX_FOV)
-		data->map->fov = MAX_FOV;
-	data->map->vfov = data->map->fov / 16 * 9;
+	data->cam.fov += dir * FOV_INCREMENT;
+	if (data->cam.fov < MIN_FOV)
+		data->cam.fov = MIN_FOV;
+	else if (data->cam.fov > MAX_FOV)
+		data->cam.fov = MAX_FOV;
+	data->cam.vfov = data->cam.fov / 16 * 9;
 	data->render(data);
 	return (0);
 }

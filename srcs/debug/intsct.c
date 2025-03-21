@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:03:32 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/28 13:27:03 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/19 13:13:53 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,21 @@
 
 void	debug_intsct(char *name, t_intsct *intsct, size_t indent)
 {
-	print_indent(indent);
-	printf("t_intsct *%s: {\n", name);
-	indent++;
-	debug_point("pos", intsct->pos, indent);
-	print_indent(indent);
+	int	pad;
+
+	pad = indent * INDENT;
+	printf("%*ct_intsct *%s: {\n", pad, ' ', name);
+	pad += INDENT;
+	debug_point("pos", intsct->pos, indent + 1);
+	printf("float angle: %f\n", intsct->angle);
 	if (intsct->side == NORTH)
-		printf("t_wall_side side: NORTH\n");
+		printf("%*ct_wall_side side: NORTH\n", pad, ' ');
 	else if (intsct->side == EAST)
-		printf("t_wall_side side: EAST\n");
+		printf("%*ct_wall_side side: EAST\n", pad, ' ');
 	else if (intsct->side == SOUTH)
-		printf("t_wall_side side: SOUTH\n");
+		printf("%*ct_wall_side side: SOUTH\n", pad, ' ');
 	else
-		printf("t_wall_side side: WEST\n");
-	indent--;
-	print_indent(indent);
-	printf("}\n");
-}
-
-void	debug_intscts(char *name, t_intsct **intscts, size_t indent)
-{
-	char	*i_name;
-	size_t	i;
-
-	print_indent(indent);
-	if (!intscts[0])
-		return ((void)printf("t_intsct **%s: { }\n", name));
-	printf("t_intsct **%s: {\n", name);
-	indent++;
-	i = 0;
-	while (intscts[i])
-	{
-		i_name = ft_ultoa(i);
-		debug_intsct(i_name, intscts[i++], indent);
-		free(i_name);
-	}
-	indent--;
-	print_indent(indent);
-	printf("}\n");
+		printf("%*ct_wall_side side: WEST\n", pad, ' ');
+	printf("%*cfloat uv: %f\n", pad, ' ', intsct->uv);
+	printf("%*c}\n", pad - INDENT, ' ');
 }

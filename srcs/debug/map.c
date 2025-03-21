@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:38:50 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/11 15:06:49 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/19 15:46:16 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ static void	p_bounds(t_map *map, size_t indent)
 {
 	char	*i_name;
 	size_t	i;
+	int	pad;
 
-	print_indent(indent);
-	printf("t_vector<t_boundary> *bounds: {\n");
+	pad = indent * INDENT;
+	printf("%*ct_vector<t_boundary> *bounds: {\n", pad, ' ');
 	indent++;
 	i = 0;
 	while (i < map->bounds->length)
@@ -27,21 +28,36 @@ static void	p_bounds(t_map *map, size_t indent)
 		debug_boundary(i_name, ft_vecindex(map->bounds, i++), indent);
 		free(i_name);
 	}
-	indent--;
-	print_indent(indent);
-	printf("}\n");
+	printf("%*c}\n", pad, ' ');
+}
+
+static void	p_texts(t_map *map, size_t indent)
+{
+	int	pad;
+
+	pad = indent * INDENT;
+	printf("%*cchar *wall_texture_paths[4]: [\n", pad, ' ');
+	pad += INDENT;
+	printf("%*c\"%s\"\n", pad, ' ', map->wall_paths[NORTH]);
+	printf("%*c\"%s\"\n", pad, ' ', map->wall_paths[EAST]);
+	printf("%*c\"%s\"\n", pad, ' ', map->wall_paths[SOUTH]);
+	printf("%*c\"%s\"\n", pad, ' ', map->wall_paths[WEST]);
+	printf("%*c]\n", pad - INDENT, ' ');
 }
 
 void	debug_map(char *name, t_map *map, size_t indent)
 {
-	print_indent(indent);
-	printf("t_map *%s: {\n", name);
+	int	pad;
+
+	pad = indent * INDENT;
+	printf("%*ct_map *%s: {\n", pad, ' ', name);
 	indent++;
-	debug_point("player_pos", map->player, indent);
-	print_indent(indent);
-	printf("float facing_dir: %f\n", map->facing_dir);
+	pad += INDENT;
+	debug_point("player_start", map->player_start, indent);
+	printf("%*cfloat start_dir: %f\n", pad, ' ', map->start_dir);
 	p_bounds(map, indent);
-	indent--;
-	print_indent(indent);
-	printf("}\n");
+	p_texts(map, indent);
+	printf("%*cint ciel_colour: %d\n", pad, ' ', map->ciel_colour);
+	printf("%*cint floor_colour: %d\n", pad, ' ', map->floor_colour);
+	printf("%*c}\n", pad - INDENT, ' ');
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_closest.c                                      :+:      :+:    :+:   */
+/*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:09:12 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/17 15:49:13 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 11:06:32 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static float	get_diff(t_ray *ray, t_intsct *intsct)
 	return (fabsf(ray->pos.x - intsct->pos.x));
 }
 
-t_intsct	*get_closest_intsct(t_ray *ray, t_vector *bounds)
+t_intsct	*cast_ray(t_ray *ray, t_vector *bounds)
 {
 	t_intsct	*closest;
 	t_intsct	*new;
@@ -46,4 +46,32 @@ t_intsct	*get_closest_intsct(t_ray *ray, t_vector *bounds)
 			free(new);
 	}
 	return (closest);
+}
+
+t_vector	*cast_rays(t_vector *rays, t_vector *bounds)
+{
+	t_vector	*closest_intscts;
+	t_intsct	*closest;
+	size_t		i;
+
+	closest_intscts = ft_vecnew_with_capacity(rays->length, sizeof(t_intsct));
+	i = 0;
+	while (i < rays->length)
+	{
+		closest = cast_ray(ft_vecindex(rays, i++), bounds);
+		if (closest)
+			ft_vecpush_consume(closest_intscts, closest);
+	}
+	return (closest_intscts);
+}
+
+t_vector	*cast(t_camera *cam)
+{
+	t_vector	*rays;
+	t_vector	*out;
+
+	rays = get_rays(cam);
+	out = cast_rays(rays, cam->bounds);
+	ft_vecfree(&rays, 0);
+	return (out);
 }

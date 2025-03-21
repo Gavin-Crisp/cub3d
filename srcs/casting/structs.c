@@ -6,11 +6,11 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:29 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/12 15:55:02 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 11:08:51 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <casting.h>
+#include "casting.h"
 
 t_boundary	*new_boundary(t_point end1, t_point end2)
 {
@@ -50,4 +50,14 @@ t_intsct	*new_intsct(t_point pos, float angle, t_wall_side side, float uv)
 	out->side = side;
 	out->uv = uv;
 	return (out);
+}
+
+void	init_camera(t_camera *cam, t_point pos, float dir, t_vector *bounds)
+{
+	cam->pos = pos;
+	cam->dir = dir;
+	cam->fov = INIT_FOV;
+	cam->vfov = INIT_FOV / 16 * 9;
+	cam->rays = INIT_RAYS;
+	cam->bounds = bounds;
 }
