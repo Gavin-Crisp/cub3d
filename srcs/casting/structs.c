@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:29 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 11:08:51 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 11:36:05 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_intsct	*new_intsct(t_point pos, float angle, t_wall_side side, float uv)
 	out->angle = angle;
 	out->side = side;
 	out->uv = uv;
+	out->height = 0;
 	return (out);
 }
 

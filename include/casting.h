@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:26:47 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 11:09:29 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 11:35:43 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_intsct
 	float		angle;
 	t_wall_side	side;
 	float		uv;
+	float		height;
 }	t_intsct;
 
 typedef struct s_camera
@@ -73,7 +74,7 @@ t_intsct	*get_intersection(t_ray *ray, t_boundary *bound);
 t_vector	*get_rays(t_camera *cam);
 
 t_intsct	*cast_ray(t_ray *ray, t_vector *bounds);
-t_vector	*cast_rays(t_vector *rays, t_vector *bounds);
+t_vector	*cast_rays(t_vector *rays, t_camera *cam);
 t_vector	*cast(t_camera *cam);
 
 #endif
