@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:31 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 13:44:05 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:49:24 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static float	get_uv(float t, t_wall_side side, t_boundary *bound)
 	if (bound->end1.y < bound->end2.y)
 		return (fmodf(t * b_length(bound), 1));
 	return (1 - fmodf(t * b_length(bound), 1));
-	
 }
 
 t_intsct	*get_intersection(t_ray *ray, t_boundary *bound)

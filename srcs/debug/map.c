@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:38:50 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/19 15:46:16 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:49:12 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	p_bounds(t_map *map, size_t indent)
 {
 	char	*i_name;
 	size_t	i;
-	int	pad;
+	int		pad;
 
 	pad = indent * INDENT;
 	printf("%*ct_vector<t_boundary> *bounds: {\n", pad, ' ');

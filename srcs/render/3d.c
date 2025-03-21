@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:58 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 13:27:33 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:46:14 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_col(t_intsct *intsct, t_rend *rend, float h_uv)
 	return (*(int *)pixel_address(texture, x_index, y_index));
 }
 
-static void draw_slice(t_pixel start, size_t width, int colour, t_img *img)
+static void	draw_slice(t_pixel start, size_t width, int colour, t_img *img)
 {
 	size_t	i;
 	int		*addr;

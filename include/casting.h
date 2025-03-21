@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:26:47 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 11:35:43 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:50:39 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ t_boundary	*new_boundary(t_point end1, t_point end2);
 float		b_length(t_boundary *bound);
 t_ray		*new_ray(t_point pos, float angle);
 t_intsct	*new_intsct(t_point pos, float angle, t_wall_side side, float uv);
-void		init_camera(t_camera *cam, t_point pos, float dir, t_vector *bounds);
+void		init_camera(
+				t_camera *cam,
+				t_point pos,
+				float dir,
+				t_vector *bounds);
 
 t_intsct	*get_intersection(t_ray *ray, t_boundary *bound);
 
