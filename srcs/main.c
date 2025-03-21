@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 13:33:19 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 14:29:15 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static t_map	*temp_get_map(void)
 
 	map = new_map();
 	map->player_start = (t_point){3, 3};
-	map->start_dir = 0;
 	ft_vecpush_consume(map->bounds, new_boundary((t_point){0, 1}, (t_point){0, 11}));
 	ft_vecpush_consume(map->bounds, new_boundary((t_point){0, 11}, (t_point){1, 11}));
 	ft_vecpush_consume(map->bounds, new_boundary((t_point){1, 11}, (t_point){1, 12}));

@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:09:12 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 11:34:13 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:59:59 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	set_intsct_height(t_intsct *intsct, t_camera *cam)
 
 	distance = hypotf(cam->pos.x - intsct->pos.x, cam->pos.y - intsct->pos.y)
 		* cosf(fmodf(cam->dir - intsct->angle + M_PI * 2, M_PI * 2));
-	intsct->height = fminf(1, 2 * atan2f(1, 2 * distance) / cam->vfov);
+	intsct->height = 2 * atan2f(1, 2 * distance) / cam->vfov;
 }
 
 t_vector	*cast_rays(t_vector *rays, t_camera *cam)

@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:58 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 13:46:14 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 16:17:08 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,22 @@ static void	draw_wall(
 	t_pixel left_width,
 	t_img *img)
 {
-	size_t	wall_height;
+	float	wall_height;
+	size_t	clipped_wh;
+	size_t	hv_offset;
 	size_t	i;
 	t_pixel	wall_start;
 
-	wall_height = intsct->height * img->height;
-	wall_start = (t_pixel){left_width.x, (img->height - wall_height) / 2};
+	wall_height = round(intsct->height * img->height);
+	clipped_wh = fmin(img->height, wall_height);
+	hv_offset = (wall_height - clipped_wh) / 2;
+	wall_start = (t_pixel){left_width.x, (img->height - clipped_wh) / 2};
 	i = 0;
-	while (i < wall_height)
+	while (i < clipped_wh)
 	{
 		draw_slice(wall_start, left_width.y,
-			get_col(intsct, rend, (float)i / wall_height), img);
+			get_col(intsct, rend, (i++ + hv_offset) / wall_height), img);
 		wall_start.y++;
-		i++;
 	}
 }
 
