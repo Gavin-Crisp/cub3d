@@ -6,25 +6,55 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:58 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 11:55:35 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:27:33 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-static int	get_col(t_intsct *intsct)
+static int	get_col(t_intsct *intsct, t_rend *rend, float h_uv)
 {
-	int	col;
+	t_img	*texture;
+	size_t	x_index;
+	size_t	y_index;
 
-	if (intsct->side == NORTH)
-		col = GREEN;
-	else if (intsct->side == EAST)
-		col = YELLOW;
-	else if (intsct->side == SOUTH)
-		col = MAGENTA;
-	else
-		col = CYAN;
-	return (col);
+	texture = rend->walls[intsct->side];
+	x_index = floorf(intsct->uv * texture->width);
+	y_index = floorf(h_uv * texture->height);
+	return (*(int *)pixel_address(texture, x_index, y_index));
+}
+
+static void draw_slice(t_pixel start, size_t width, int colour, t_img *img)
+{
+	size_t	i;
+	int		*addr;
+
+	addr = pixel_address(img, start.x, start.y);
+	i = 0;
+	while (i < width)
+		addr[i++] = colour;
+}
+
+static void	draw_wall(
+	t_rend *rend,
+	t_intsct *intsct,
+	t_pixel left_width,
+	t_img *img)
+{
+	size_t	wall_height;
+	size_t	i;
+	t_pixel	wall_start;
+
+	wall_height = intsct->height * img->height;
+	wall_start = (t_pixel){left_width.x, (img->height - wall_height) / 2};
+	i = 0;
+	while (i < wall_height)
+	{
+		draw_slice(wall_start, left_width.y,
+			get_col(intsct, rend, (float)i / wall_height), img);
+		wall_start.y++;
+		i++;
+	}
 }
 
 void	render_3d(t_rend *rend, t_vector *intscts, t_img *img)
@@ -32,8 +62,6 @@ void	render_3d(t_rend *rend, t_vector *intscts, t_img *img)
 	size_t		i;
 	size_t		rect_left;
 	size_t		rect_width;
-	size_t		wall_height;
-	t_intsct	*intsct;
 
 	rect_left = (img->width % intscts->length) / 2;
 	rect_width = img->width / intscts->length;
@@ -44,11 +72,8 @@ void	render_3d(t_rend *rend, t_vector *intscts, t_img *img)
 		(t_pixel){img->width, img->height}, rend->floor, img);
 	while (i < intscts->length)
 	{
-		intsct = ft_vecindex(intscts, i++);
-		wall_height = intsct->height * img->height;
-		put_rect((t_pixel){rect_left, (img->height - wall_height) / 2},
-			(t_pixel){rect_left + rect_width,
-			(img->height + wall_height) / 2}, get_col(intsct), img);
+		draw_wall(rend, ft_vecindex(intscts, i++),
+			(t_pixel){rect_left, rect_width}, img);
 		rect_left += rect_width;
 	}
 }
