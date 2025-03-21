@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:31 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/17 15:31:09 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:44:05 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,32 @@ static float	get_u_numerator(t_boundary *bound, t_ray *ray)
 	);
 }
 
+static float	get_uv(float t, t_wall_side side, t_boundary *bound)
+{
+	if (side == NORTH)
+	{
+		if (bound->end1.x < bound->end2.x)
+			return (1 - fmodf(t * b_length(bound), 1));
+		return (fmodf(t * b_length(bound), 1));
+	}
+	else if (side == SOUTH)
+	{
+		if (bound->end1.x < bound->end2.x)
+			return (fmodf(t * b_length(bound), 1));
+		return (1 - fmodf(t * b_length(bound), 1));
+	}
+	else if (side == EAST)
+	{
+		if (bound->end1.y < bound->end2.y)
+			return (1 - fmodf(t * b_length(bound), 1));
+		return (fmodf(t * b_length(bound), 1));
+	}
+	if (bound->end1.y < bound->end2.y)
+		return (fmodf(t * b_length(bound), 1));
+	return (1 - fmodf(t * b_length(bound), 1));
+	
+}
+
 t_intsct	*get_intersection(t_ray *ray, t_boundary *bound)
 {
 	float		t;
@@ -59,5 +85,5 @@ t_intsct	*get_intersection(t_ray *ray, t_boundary *bound)
 	return (new_intsct(
 			(t_point){bound->end1.x + t * (bound->end2.x - bound->end1.x),
 			bound->end1.y + t * (bound->end2.y - bound->end1.y)}, ray->angle,
-		side, fmodf(t * b_length(bound), 1)));
+		side, get_uv(t, side, bound)));
 }
