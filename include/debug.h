@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:31:48 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/19 12:57:20 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/24 15:39:42 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "constants.h"
 # include "libft.h"
 # include "map.h"
+# include "mlx_util.h"
 
 void	debug_point(char *name, t_point point, size_t indent);
 void	debug_intsct(char *name, t_intsct *intsct, size_t indent);

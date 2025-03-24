@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:38:50 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/24 13:52:43 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/24 15:43:18 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ static void	p_texts(t_map *map, size_t indent)
 	printf("%*c]\n", pad - INDENT, ' ');
 }
 
+static void	p_colour(char *name, int colour, int pad)
+{
+	printf("%*ct_colour(trgb) %s: %02x|%02x|%02x|%02x\n", pad, ' ', name,
+		colour_get_t(colour), colour_get_r(colour), colour_get_g(colour),
+		colour_get_b(colour));
+}
+
 void	debug_map(char *name, t_map *map, size_t indent)
 {
 	int	pad;
@@ -62,7 +69,7 @@ void	debug_map(char *name, t_map *map, size_t indent)
 	printf("%*cfloat start_dir: %f\n", pad, ' ', map->start_dir);
 	p_bounds(map->bounds, indent);
 	p_texts(map, indent);
-	printf("%*cint ciel_colour: %d\n", pad, ' ', map->ciel_colour);
-	printf("%*cint floor_colour: %d\n", pad, ' ', map->floor_colour);
+	p_colour("ciel_colour", map->ciel_colour, pad);
+	p_colour("floor_colour", map->floor_colour, pad);
 	printf("%*c}\n", pad - INDENT, ' ');
 }
