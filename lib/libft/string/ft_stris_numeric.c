@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_stris_numeric.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 13:42:53 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/24 13:39:15 by gcrisp           ###   ########.fr       */
+/*   Created: 2025/03/24 14:57:13 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/24 14:59:06 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_utils.h"
+#include "libft.h"
 
-char	*reallocstr(char *s, size_t size)
+int	ft_stris_numeric(const char *s)
 {
-	char	*new;
 	size_t	i;
 
-	new = malloc(size);
-	if (!new)
-		return (0);
 	i = 0;
-	while (s[i] && i < size - 1)
+	while (s[i])
 	{
-		new[i] = s[i];
-		i++;
+		if (!ft_isdigit(s[i++]))
+			return (0);
 	}
-	while (i < size)
-		new[i++] = 0;
-	free(s);
-	return (new);
-}
-
-char	*assignbuf(void)
-{
-	char	*out;
-
-	out = ft_calloc(1, GNL_BUFFER_SIZE);
-	if (!out)
-		return (0);
-	return (out);
+	return (1);
 }

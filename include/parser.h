@@ -1,43 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 13:42:53 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/24 13:39:15 by gcrisp           ###   ########.fr       */
+/*   Created: 2025/03/24 11:23:35 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/24 14:47:32 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_utils.h"
+#ifndef PARSER_H
+# define PARSER_H
+# include <fcntl.h>
+# include "libft.h"
+# include "map.h"
+# include "mlx_util.h"
 
-char	*reallocstr(char *s, size_t size)
-{
-	char	*new;
-	size_t	i;
+t_map	*parse(char	*path);
 
-	new = malloc(size);
-	if (!new)
-		return (0);
-	i = 0;
-	while (s[i] && i < size - 1)
-	{
-		new[i] = s[i];
-		i++;
-	}
-	while (i < size)
-		new[i++] = 0;
-	free(s);
-	return (new);
-}
+int		parse_texture_line(t_map *map, char *line);
+int		parse_colour_line(t_map *map, char *line);
 
-char	*assignbuf(void)
-{
-	char	*out;
-
-	out = ft_calloc(1, GNL_BUFFER_SIZE);
-	if (!out)
-		return (0);
-	return (out);
-}
+#endif

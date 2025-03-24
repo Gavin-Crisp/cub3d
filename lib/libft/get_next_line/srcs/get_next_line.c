@@ -6,13 +6,14 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 11:12:59 by gcrisp            #+#    #+#             */
-/*   Updated: 2023/05/09 11:31:57 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/24 13:39:24 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "get_next_line_utils.h"
 
-void	clearbuf(char buf[BUFFER_SIZE])
+void	clearbuf(char *buf)
 {
 	size_t	i;
 
@@ -23,7 +24,7 @@ void	clearbuf(char buf[BUFFER_SIZE])
 		buf[i++] = 0;
 }
 
-void	cleanbuf(char buf[BUFFER_SIZE])
+void	cleanbuf(char *buf)
 {
 	size_t	i;
 	size_t	j;
@@ -43,7 +44,7 @@ void	cleanbuf(char buf[BUFFER_SIZE])
 	}
 }
 
-char	*addbuf(char *dst, char buf[BUFFER_SIZE])
+char	*addbuf(char *dst, char *buf)
 {
 	size_t	bl;
 	size_t	dl;
@@ -66,7 +67,7 @@ char	*addbuf(char *dst, char buf[BUFFER_SIZE])
 	return (dst);
 }
 
-char	*runloop(int fd, char *out, char buf[BUFFER_SIZE])
+char	*runloop(int fd, char *out, char *buf)
 {
 	int	bytesread;
 

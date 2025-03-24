@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:27:00 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 11:14:49 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/24 14:09:41 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_map	*new_map(void)
 	out->wall_paths[EAST] = 0;
 	out->wall_paths[SOUTH] = 0;
 	out->wall_paths[WEST] = 0;
-	out->ciel_colour = 0;
-	out->floor_colour = 0;
+	out->ciel_colour = 0xff000000;
+	out->floor_colour = 0xff000000;
 	return (out);
 }
 

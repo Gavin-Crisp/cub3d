@@ -11,6 +11,7 @@ SRCS			+= $(addprefix $(SRC_DIR)/casting/,cast get_rays intersection structs)
 SRCS			+= $(addprefix $(SRC_DIR)/debug/,boundary intsct map point)
 SRCS			+= $(addprefix $(SRC_DIR)/events/,edata on_destroy on_keydown)
 SRCS			+= $(addprefix $(SRC_DIR)/mlx_util/,colour hvline_rect image put put_line to_pixel)
+SRCS			+= $(addprefix $(SRC_DIR)/parser/,parser texture colour)
 SRCS			+= $(addprefix $(SRC_DIR)/render/,2d 3d rd)
 
 SRCS			:= $(addsuffix .c,$(SRCS))
@@ -35,6 +36,8 @@ export CFLAGS
 MAKEFLAGS		+= --no-print-directory
 
 export INDENT	:= 0
+
+RUN_FILE		:= maps/basic.cub
 
 all: $(NAME)
 
@@ -86,7 +89,7 @@ re:
 norm: ; norminette srcs include lib/libft | grep -v OK || echo "All good"
 
 run: $(NAME)
-	./$(NAME)
+	./$(NAME) $(RUN_FILE)
 
 debug: $(NAME)
 	lldb $(NAME)

@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strcount.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 13:42:53 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/24 13:39:15 by gcrisp           ###   ########.fr       */
+/*   Created: 2025/03/24 14:28:52 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/24 14:33:13 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_utils.h"
+#include "libft.h"
 
-char	*reallocstr(char *s, size_t size)
+size_t	ft_strcount(const char *s, char c)
 {
-	char	*new;
 	size_t	i;
+	size_t	count;
 
-	new = malloc(size);
-	if (!new)
-		return (0);
 	i = 0;
-	while (s[i] && i < size - 1)
+	count = 0;
+	while (s[i])
 	{
-		new[i] = s[i];
-		i++;
+		if (s[i++] == c)
+			count++;
 	}
-	while (i < size)
-		new[i++] = 0;
-	free(s);
-	return (new);
-}
-
-char	*assignbuf(void)
-{
-	char	*out;
-
-	out = ft_calloc(1, GNL_BUFFER_SIZE);
-	if (!out)
-		return (0);
-	return (out);
+	return (count);
 }
