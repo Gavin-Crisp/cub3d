@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:27:00 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/24 14:09:41 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/26 11:26:31 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_map	*new_map(void)
 
 	out = malloc(sizeof(t_map));
 	out->player_start = (t_point){0, 0};
-	out->start_dir = 0;
+	out->start_dir = -1;
 	out->bounds = ft_vecnew(sizeof(t_boundary));
 	out->wall_paths[NORTH] = 0;
 	out->wall_paths[EAST] = 0;

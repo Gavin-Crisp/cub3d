@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:38:50 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/24 15:43:18 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/24 16:30:41 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	p_texts(t_map *map, size_t indent)
 
 static void	p_colour(char *name, int colour, int pad)
 {
-	printf("%*ct_colour(trgb) %s: %02x|%02x|%02x|%02x\n", pad, ' ', name,
+	printf("%*ct_colour(trgb) %s: %02X|%02X|%02X|%02X\n", pad, ' ', name,
 		colour_get_t(colour), colour_get_r(colour), colour_get_g(colour),
 		colour_get_b(colour));
 }

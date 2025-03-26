@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:22:43 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/24 15:00:27 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/26 12:20:22 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ void		ft_memswap(void *a, void *b, size_t n);
 void		*ft_simple_realloc(void *p, size_t old, size_t new);
 
 // string
+char		**ft_split_by(char const *s, int (*p)(int c));
 char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strchrs(const char *s, const char *cs);
@@ -181,6 +182,7 @@ typedef struct s_vector
 	size_t	_elem_size;
 }	t_vector;
 
+void		ft_vecclear(t_vector *vec, void (*clear)(void *));
 int			ft_vecdelete(t_vector *vec, size_t index, void (*clear)(void *));
 void		ft_vecfor_each(t_vector *vec, void (*action)(void *, size_t));
 void		ft_vecfree(t_vector **pvec, void (*clear)(void *));
