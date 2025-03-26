@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/26 14:50:02 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/26 15:38:04 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	render(t_edata *data)
 
 	clear_image(data->minimap);
 	intscts = cast(&data->cam);
-	render_2d(&data->cam, intscts, data->minimap);
+//	render_2d(&data->cam, intscts, data->minimap);
 	render_3d(&data->rd, intscts, data->main_render);
 	ft_vecfree(&intscts, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->main_render->img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img,
-		0, SCREEN_Y - MINIMAP_Y);
+//	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img,
+//		0, SCREEN_Y - MINIMAP_Y);
 }
 
 static int	init_data(t_edata *data, char *map_file)
@@ -39,8 +39,6 @@ static int	init_data(t_edata *data, char *map_file)
 	t_map	*map;
 
 	map = parse(map_file);
-	map->player_start = (t_point){3.5f, 3.5f};
-	map->start_dir = 0;
 	if (!map)
 		return (2);
 	init_camera(&data->cam, map->player_start, map->start_dir, map->bounds);

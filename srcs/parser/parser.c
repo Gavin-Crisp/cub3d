@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:29:34 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/26 13:29:46 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/26 15:40:34 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	parse_line(t_map *map, char *line)
 	return (1);
 }
 
-t_map	*check_valid(t_map *map)
+static t_map	*check_valid(t_map *map)
 {
 	if (!map)
 		return (0);
@@ -67,5 +67,5 @@ t_map	*parse(char *path)
 		free(line);
 	}
 	close(fd);
-	return (map);
+	return (check_valid(map));
 }
