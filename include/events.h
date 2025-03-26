@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:45:18 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 13:51:12 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/26 14:22:01 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ struct s_edata
 void	clear_edata(t_edata *data);
 
 int		on_destroy(t_edata *param);
+
 int		on_keydown(int key, t_edata *data);
+int		on_move(t_point dir, t_edata *data);
 
 #endif
