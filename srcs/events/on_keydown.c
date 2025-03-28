@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:02:01 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/26 14:41:45 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:16:05 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ static int	on_esc(t_edata *data)
 
 static int	on_turn(float dir, t_edata *data)
 {
-	data->cam.dir += dir * TURN_SPEED + M_PI * 2;
-	data->cam.dir = fmodf(data->cam.dir, M_PI * 2);
+	data->cast.dir += dir * TURN_SPEED + M_PI * 2;
+	data->cast.dir = fmodf(data->cast.dir, M_PI * 2);
 	data->render(data);
 	return (0);
 }
 
 static int	adjust_fov(float dir, t_edata *data)
 {
-	data->cam.fov += dir * FOV_INCREMENT;
-	if (data->cam.fov < MIN_FOV)
-		data->cam.fov = MIN_FOV;
-	else if (data->cam.fov > MAX_FOV)
-		data->cam.fov = MAX_FOV;
-	data->cam.vfov = data->cam.fov / 16 * 9;
+	data->cast.fov += dir * FOV_INCREMENT;
+	if (data->cast.fov < MIN_FOV)
+		data->cast.fov = MIN_FOV;
+	else if (data->cast.fov > MAX_FOV)
+		data->cast.fov = MAX_FOV;
+	data->cast.vfov = data->cast.fov / 16 * 9;
 	data->render(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/26 15:38:04 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:15:05 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	render(t_edata *data)
 	t_vector	*intscts;
 
 	clear_image(data->minimap);
-	intscts = cast(&data->cam);
+	intscts = cast(&data->cast);
 //	render_2d(&data->cam, intscts, data->minimap);
 	render_3d(&data->rd, intscts, data->main_render);
 	ft_vecfree(&intscts, 0);
@@ -41,7 +41,7 @@ static int	init_data(t_edata *data, char *map_file)
 	map = parse(map_file);
 	if (!map)
 		return (2);
-	init_camera(&data->cam, map->player_start, map->start_dir, map->bounds);
+	init_cast(&data->cast, map->player_start, map->start_dir, map->bounds);
 	map->bounds = 0;
 	data->mlx = mlx_init();
 	init_rd(&data->rd, data->mlx, map);

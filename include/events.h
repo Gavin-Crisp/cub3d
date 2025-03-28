@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:45:18 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/26 14:22:01 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:14:41 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ struct s_edata
 	t_img		*main_render;
 	t_img		*minimap;
 	t_rend		rd;
-	t_camera	cam;
+	t_cast		cast;
 	void		(*render)(t_edata *data);
 };
 

@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:26:47 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 13:50:39 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:14:01 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_intsct
 	float		height;
 }	t_intsct;
 
-typedef struct s_camera
+typedef struct s_cast
 {
 	t_point		pos;
 	float		dir;
@@ -61,24 +61,24 @@ typedef struct s_camera
 	float		vfov;
 	size_t		rays;
 	t_vector	*bounds;
-}	t_camera;
+}	t_cast;
 
 t_boundary	*new_boundary(t_point end1, t_point end2);
 float		b_length(t_boundary *bound);
 t_ray		*new_ray(t_point pos, float angle);
 t_intsct	*new_intsct(t_point pos, float angle, t_wall_side side, float uv);
-void		init_camera(
-				t_camera *cam,
+void		init_cast(
+				t_cast *cast,
 				t_point pos,
 				float dir,
 				t_vector *bounds);
 
 t_intsct	*get_intersection(t_ray *ray, t_boundary *bound);
 
-t_vector	*get_rays(t_camera *cam);
+t_vector	*get_rays(t_cast *cast);
 
 t_intsct	*cast_ray(t_ray *ray, t_vector *bounds);
-t_vector	*cast_rays(t_vector *rays, t_camera *cam);
-t_vector	*cast(t_camera *cam);
+t_vector	*cast_rays(t_vector *rays, t_cast *cast);
+t_vector	*cast(t_cast *cast);
 
 #endif

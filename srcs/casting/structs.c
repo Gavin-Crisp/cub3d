@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:29 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 11:36:05 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:14:06 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ t_intsct	*new_intsct(t_point pos, float angle, t_wall_side side, float uv)
 	return (out);
 }
 
-void	init_camera(t_camera *cam, t_point pos, float dir, t_vector *bounds)
+void	init_cast(t_cast *cast, t_point pos, float dir, t_vector *bounds)
 {
-	cam->pos = pos;
-	cam->dir = dir;
-	cam->fov = INIT_FOV;
-	cam->vfov = INIT_FOV / 16 * 9;
-	cam->rays = INIT_RAYS;
-	cam->bounds = bounds;
+	cast->pos = pos;
+	cast->dir = dir;
+	cast->fov = INIT_FOV;
+	cast->vfov = INIT_FOV / 16 * 9;
+	cast->rays = INIT_RAYS;
+cast->bounds = bounds;
 }
