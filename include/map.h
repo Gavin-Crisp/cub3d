@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:25:18 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/19 15:41:57 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/28 12:30:22 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ typedef struct s_map
 {
 	t_point		player_start;
 	float		start_dir;
-	float		fov;
-	float		vfov;
 	t_vector	*bounds;
 	char		*wall_paths[4];
 	int			ciel_colour;

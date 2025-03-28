@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:22:08 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/26 14:51:55 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:00:35 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_ray	get_ray(t_point dir, t_edata *data)
 {
 	t_ray	move;
 
-	move = (t_ray) {data->cam.pos, (t_point) {0, 0}, data->cam.dir};
+	move = (t_ray){data->cam.pos, (t_point){0, 0}, data->cam.dir};
 	if (dir.x == 1)
 	{
 		move.dir.x = MOVE_SPEED * (-1 * sin(data->cam.dir)) + move.pos.x;
@@ -48,9 +48,9 @@ int	on_move(t_point dir, t_edata *data)
 	move = get_ray(dir, data);
 	intsct = cast_ray(&move, data->cam.bounds);
 	if (!(intsct && (fabsf(intsct->pos.x - data->cam.pos.x)
-		< fabsf(move.dir.x - data->cam.pos.x)
-		|| fabsf(intsct->pos.y - data->cam.pos.y)
-		< fabsf(move.dir.y - data->cam.pos.y))))
+				< fabsf(move.dir.x - data->cam.pos.x)
+				|| fabsf(intsct->pos.y - data->cam.pos.y)
+				< fabsf(move.dir.y - data->cam.pos.y))))
 	{
 		data->cam.pos.x = move.dir.x;
 		data->cam.pos.y = move.dir.y;

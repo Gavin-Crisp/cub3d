@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:23:35 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/24 15:29:38 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/28 12:57:13 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 
 t_map	*parse(char	*path);
 
-int		parse_map_line(t_map *map, char *line);
-int		parse_texture_line(t_map *map, char *line);
-int		parse_colour_line(t_map *map, char *line);
+char	*parse_render_data(t_map *map, int fd);
+int		parse_bounds(t_map *map, char *line, int fd);
 
 #endif
