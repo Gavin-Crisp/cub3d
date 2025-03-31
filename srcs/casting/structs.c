@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:25:29 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/28 13:14:06 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/28 15:43:18 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ void	init_cast(t_cast *cast, t_point pos, float dir, t_vector *bounds)
 	cast->fov = INIT_FOV;
 	cast->vfov = INIT_FOV / 16 * 9;
 	cast->rays = INIT_RAYS;
-cast->bounds = bounds;
+	cast->bounds = bounds;
 }

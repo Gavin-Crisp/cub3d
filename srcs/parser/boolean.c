@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   boolean.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 11:23:35 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/31 14:31:05 by gcrisp           ###   ########.fr       */
+/*   Created: 2025/03/31 14:09:34 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/31 14:31:33 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include <fcntl.h>
-# include "libft.h"
-# include "map.h"
-# include "mlx_util.h"
+#include "parser.h"
 
-t_map	*parse(char	*path);
+int	is_inside(char c)
+{
+	return (c == '0' || c == 'N' || c == 'E' || c == 'S' || c == 'W');
+}
 
-char	*parse_render_data(t_map *map, int fd);
-int		parse_bounds(t_map *map, char *line, int fd);
+int	is_outside(char c)
+{
+	return (c == ' ');
+}
 
-int		is_inside(char c);
-int		is_outside(char c);
-int		is_player(char c);
-int		is_empty(char c);
+int is_player(char c)
+{
+	return (c == 'N' || c == 'E' || c == 'S' || c == 'W');
+}
 
-#endif
+int	is_empty(char c)
+{
+	return (c == '0');
+}

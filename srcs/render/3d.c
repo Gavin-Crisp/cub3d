@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:58 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/21 16:17:08 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/28 15:29:12 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void	draw_wall(
 	t_img *img)
 {
 	float	wall_height;
-	size_t	clipped_wh;
 	size_t	hv_offset;
+	size_t	clipped_wh;
 	size_t	i;
 	t_pixel	wall_start;
 
