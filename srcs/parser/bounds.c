@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 14:56:11 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/04/03 13:07:22 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/03 15:29:38 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	check_last(char *line)
 
 int	parse_bounds(t_map *map, char *prev_line, int fd)
 {
-	size_t  line_num;
+	size_t	line_num;
 	char	*line;
 
 	if (parse_first(map->bounds, prev_line))

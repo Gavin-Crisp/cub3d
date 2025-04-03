@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:36:58 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/28 13:17:04 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/03 15:29:22 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	render_2d(t_cast *cast, t_vector *intscts, t_img *img)
 			col = MAGENTA;
 		else
 			col = CYAN;
-//		put_line(cast->pos, intscts[i]->pos, RED, img);
 		put_point(intsct->pos, 10, col, img);
 	}
 	put_point(cast->pos, 15, WHITE, img);

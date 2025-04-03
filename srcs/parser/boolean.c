@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 14:09:34 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/31 14:31:33 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/03 15:31:41 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_outside(char c)
 	return (c == ' ');
 }
 
-int is_player(char c)
+int	is_player(char c)
 {
 	return (c == 'N' || c == 'E' || c == 'S' || c == 'W');
 }

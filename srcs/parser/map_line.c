@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 15:30:34 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/04/03 12:14:47 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/03 15:31:48 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,10 @@ int	parse_map_line(t_map *map, char *line, char *prev_line, size_t line_num)
 			i = parse_inside(line, prev_line, i);
 		}
 		else if (line[i] == '1')
-			i = parse_wall(map->bounds, line, i, line_num); 
+			i = parse_wall(map->bounds, line, i, line_num);
 		else
 			return (1);
-		if (i == (size_t)-1)
+		if (i == (size_t) - 1)
 			return (1);
 	}
 	return (0);

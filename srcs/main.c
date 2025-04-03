@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/31 10:54:19 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/03 15:29:09 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,9 @@ void	render(t_edata *data)
 
 	clear_image(data->minimap);
 	intscts = cast(&data->cast);
-	render_2d(&data->cast, intscts, data->minimap);
 	render_3d(&data->rd, intscts, data->main_render);
 	ft_vecfree(&intscts, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->main_render->img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->minimap->img,
-		0, SCREEN_Y - MINIMAP_Y);
 }
 
 static int	init_data(t_edata *data, char *map_file)
