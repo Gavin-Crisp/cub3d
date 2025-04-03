@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 14:56:11 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/31 16:43:53 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/03 11:10:21 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	parse_bounds(t_map *map, char *prev_line, int fd)
 	line = get_next_line(fd);
 	while (line && line[0] != '\n')
 	{
-		if (parse_map_line(map, line, line_num++))
+		if (parse_map_line(map, line, prev_line, line_num++))
 		{
 			free(prev_line);
 			free(line);

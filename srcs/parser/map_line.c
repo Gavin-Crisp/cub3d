@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 15:30:34 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/31 16:37:20 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/03 11:32:56 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,22 @@ static size_t	parse_wall(
 	return (i);
 }
 
-static size_t	parse_outside(char *line, size_t i)
+static size_t	parse_outside(char *line, char *prev_line, size_t i)
 {
+	size_t	j;
+
 	if (i && is_inside(line[i - 1]))
 		return (-1);
+	j = 0;
+	while (prev_line[j] && j < i)
+		j++;
+	while (is_outside(line[i]) && prev_line[j])
+	{
+		if (is_inside(prev_line[j]))
+			return (-1);
+		j++;
+		i++;
+	}
 	while (is_outside(line[i]))
 		i++;
 	if (is_inside(line[i]))
@@ -61,8 +73,9 @@ static size_t	parse_outside(char *line, size_t i)
 	return (i);
 }
 
-static size_t	parse_inside(char *line, size_t i)
+static size_t	parse_inside(char *line, char *prev_line, size_t i)
 {
+	(void)prev_line;
 	if (!i || is_outside(line[i - 1]))
 		return (-1);
 	while (is_empty(line[i]))
@@ -72,7 +85,7 @@ static size_t	parse_inside(char *line, size_t i)
 	return (i);
 }
 
-int	parse_map_line(t_map *map, char *line, size_t line_num)
+int	parse_map_line(t_map *map, char *line, char *prev_line, size_t line_num)
 {
 	size_t	i;
 
@@ -80,7 +93,7 @@ int	parse_map_line(t_map *map, char *line, size_t line_num)
 	while (line[i] && line[i] != '\n')
 	{
 		if (is_outside(line[i]))
-			i = parse_outside(line, i);
+			i = parse_outside(line, prev_line, i);
 		else if (is_inside(line[i]))
 		{
 			if (is_player(line[i]))
@@ -88,7 +101,7 @@ int	parse_map_line(t_map *map, char *line, size_t line_num)
 				if (parse_player(map, line, line_num, i++))
 					return (1);
 			}
-			i = parse_inside(line, i);
+			i = parse_inside(line, prev_line, i);
 		}
 		else if (line[i] == '1')
 			i = parse_wall(map->bounds, line, i, line_num); 
