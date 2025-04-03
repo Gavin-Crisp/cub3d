@@ -6,24 +6,33 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 14:56:11 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/04/03 11:10:21 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/03 13:07:22 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	check_first(char *line)
+static int	parse_first(t_vector *bounds, char *line)
 {
 	size_t	i;
+	size_t	wall_start;
 
 	i = 0;
-	while (line[i])
+	while (line[i] && line[i] != '\n')
 	{
-		if (is_inside(line[i++]))
+		while (line[i] != '1')
 		{
-			free(line);
-			return (1);
+			if (!is_outside(line[i++]))
+			{
+				free(line);
+				return (1);
+			}
 		}
+		wall_start = i;
+		while (line[i] == '1')
+			i++;
+		ft_vecpush_consume(bounds, new_boundary((t_point){wall_start, 1},
+				(t_point){i, 1}));
 	}
 	return (0);
 }
@@ -56,10 +65,10 @@ int	parse_bounds(t_map *map, char *prev_line, int fd)
 	size_t  line_num;
 	char	*line;
 
-	line_num = 0;
-	if (check_first(prev_line))
+	if (parse_first(map->bounds, prev_line))
 		return (1);
 	line = get_next_line(fd);
+	line_num = 1;
 	while (line && line[0] != '\n')
 	{
 		if (parse_map_line(map, line, prev_line, line_num++))

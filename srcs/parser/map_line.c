@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 15:30:34 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/04/03 11:32:56 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/03 12:14:47 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,23 @@ static size_t	parse_wall(
 {
 	size_t	start;
 
+	if (i && line[i - 1] == '0')
+	{
+		ft_vecpush_consume(bounds, new_boundary((t_point){i, line_num},
+				(t_point){i, line_num + 1}));
+	}
 	start = i;
 	while (line[i] == '1')
 		i++;
 	ft_vecpush_consume(bounds, new_boundary((t_point){start, line_num},
 			(t_point){i, line_num}));
-	ft_vecpush_consume(bounds, new_boundary((t_point){i, line_num},
-			(t_point){i, line_num + 1}));
-	ft_vecpush_consume(bounds, new_boundary((t_point){i, line_num + 1},
-			(t_point){start, line_num + 1}));
 	ft_vecpush_consume(bounds, new_boundary((t_point){start, line_num + 1},
-			(t_point){start, line_num}));
+			(t_point){i, line_num + 1}));
+	if (line [i] == '0')
+	{
+		ft_vecpush_consume(bounds, new_boundary((t_point){i, line_num},
+				(t_point){i, line_num + 1}));
+	}
 	return (i);
 }
 
@@ -59,12 +65,14 @@ static size_t	parse_outside(char *line, char *prev_line, size_t i)
 	j = 0;
 	while (prev_line[j] && j < i)
 		j++;
-	while (is_outside(line[i]) && prev_line[j])
+	if (prev_line[j])
 	{
-		if (is_inside(prev_line[j]))
-			return (-1);
-		j++;
-		i++;
+		while (is_outside(line[i]) && prev_line[i])
+		{
+			if (is_inside(prev_line[i]))
+				return (-1);
+			i++;
+		}
 	}
 	while (is_outside(line[i]))
 		i++;
@@ -75,11 +83,21 @@ static size_t	parse_outside(char *line, char *prev_line, size_t i)
 
 static size_t	parse_inside(char *line, char *prev_line, size_t i)
 {
-	(void)prev_line;
+	size_t	j;
+
 	if (!i || is_outside(line[i - 1]))
 		return (-1);
+	j = 0;
+	while (prev_line[j] && j < i)
+		j++;
+	if (!prev_line[j])
+		return (-1);
 	while (is_empty(line[i]))
+	{
+		if (!prev_line[i] || prev_line[i] == '\n' || is_outside(prev_line[i]))
+			return (-1);
 		i++;
+	}
 	if (!line[i] || line[i] == '\n' || is_outside(line[i]))
 		return (-1);
 	return (i);
