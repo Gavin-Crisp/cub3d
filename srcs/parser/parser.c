@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:29:34 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/28 12:53:56 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/09 14:49:49 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ static int	check_map(t_map **pmap)
 	free_map(*pmap);
 	*pmap = 0;
 	return (1);
+}
+
+static t_map	*final_check(t_map *map)
+{
+	if (!map || map->start_dir != -1)
+		return (map);
+	free_map(map);
+	return (0);
 }
 
 t_map	*parse(char *path)
@@ -49,5 +57,5 @@ t_map	*parse(char *path)
 		map = 0;
 	}
 	close(fd);
-	return (map);
+	return (final_check(map));
 }

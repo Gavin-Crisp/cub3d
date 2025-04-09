@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/04/03 15:29:09 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/09 14:42:45 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "render.h"
 #include "events.h"
 #include "parser.h"
+#include <errno.h>
 
 void	render(t_edata *data)
 {
@@ -68,9 +69,11 @@ int	main(int argc, char *argv[])
 	{
 		printf("Error:\n");
 		if (init_ret == 1)
-			printf("%s: Could not parse all textures\n", argv[0]);
-		else
+			printf("%s: Could not load all textures\n", argv[0]);
+		else if (errno)
 			perror(argv[0]);
+		else
+			printf("%s: Could not parse map file\n", argv[0]);
 		return (1);
 	}
 	mlx_hook(data.win, 17, 1L << 17, on_destroy, 0);
