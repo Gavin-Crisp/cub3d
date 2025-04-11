@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:18:48 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/04/09 14:42:18 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/11 14:56:37 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ t_img	*new_image_xpm(void *mlx, char *rel_path)
 		return (0);
 	out->img = mlx_xpm_file_to_image(mlx, rel_path, &out->width, &out->height);
 	if (!out->img)
+	{
+		free(out);
 		return (0);
+	}
 	out->addr = mlx_get_data_addr(out->img, &out->bytes_pp, &out->line_length,
 			&out->endian);
 	out->bytes_pp /= 8;
@@ -46,6 +49,8 @@ t_img	*new_image_xpm(void *mlx, char *rel_path)
 
 void	free_img(t_img *img, void *mlx)
 {
+	if (!img)
+		return ;
 	mlx_destroy_image(mlx, img->img);
 	free(img);
 }

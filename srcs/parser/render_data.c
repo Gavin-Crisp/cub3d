@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 11:50:12 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/28 13:05:00 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/11 15:08:10 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static int	str_to_val(char *str)
 	if (!ft_stris_numeric(str))
 		return (-1);
 	out = ft_atoi(str);
-	free(str);
 	if (out > 255)
 		return (-1);
 	return (out);
@@ -60,6 +59,9 @@ static int	vals_to_col(char *str)
 	rgb[0] = str_to_val(vals[0]);
 	rgb[1] = str_to_val(vals[1]);
 	rgb[2] = str_to_val(vals[2]);
+	free(vals[0]);
+	free(vals[1]);
+	free(vals[2]);
 	free(vals);
 	if (rgb[0] < 0 || rgb[1] < 0 || rgb[2] < 0)
 		return (-1);
@@ -79,7 +81,7 @@ static int	parse_colour(t_map *map, char **pline)
 	if (colour_get_t(*colour) != 0xff || ft_strcount(*pline, ',') != 2)
 	{
 		free(*pline);
-		return (0);
+		return (1);
 	}
 	*colour = vals_to_col(ft_strtrim(*pline + 2, " \n"));
 	free(*pline);

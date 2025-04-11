@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/04/09 14:42:45 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/11 14:53:09 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	init_data(t_edata *data, char *map_file)
 	if (data->rd.walls[NORTH] == 0 || data->rd.walls[EAST] == 0
 		|| data->rd.walls[SOUTH] == 0 || data->rd.walls[WEST] == 0)
 	{
-		mlx_destroy_display(data->mlx);
+		clear_edata(data);
 		return (1);
 	}
 	data->win = mlx_new_window(data->mlx, SCREEN_X, SCREEN_Y, "Cub3D");
