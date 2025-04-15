@@ -39,7 +39,6 @@ static int	parse_first(t_vector *bounds, char *line)
 
 static int	check_last(char *line)
 {
-	size_t	start;
 	size_t	i;
 
 	i = 0;
@@ -47,7 +46,6 @@ static int	check_last(char *line)
 	{
 		while (is_outside(line[i]))
 			i++;
-		start = i;
 		while (line[i] == '1')
 			i++;
 		if (!(is_outside(line[i]) || line[i] == '\n' || !line[i]))

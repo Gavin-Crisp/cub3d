@@ -18,8 +18,6 @@ static void	vstroke(t_pixel p, int col, t_img *img)
 	size_t	height;
 
 	p.y -= (LINE_STROKE - 1) / 2;
-	if (p.y < 0)
-		p.y = 0;
 	height = img->height - p.y;
 	if (height > LINE_STROKE)
 		height = LINE_STROKE;
@@ -38,8 +36,6 @@ static void	hstroke(t_pixel p, int col, t_img *img)
 
 	i = 0;
 	p.x -= (LINE_STROKE - 1) / 2;
-	if (p.x < 0)
-		p.x = 0;
 	width = img->width - p.x;
 	if (width > LINE_STROKE)
 		width = LINE_STROKE;
