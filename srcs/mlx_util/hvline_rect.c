@@ -49,8 +49,6 @@ void	put_hline(t_pixel p, size_t len, int col, t_img *img)
 		return ;
 	b = (t_pixel){p.x + len, p.y + (LINE_STROKE - 1) / 2};
 	p.y -= (LINE_STROKE - 1) / 2;
-	if (p.y < 0)
-		p.y = 0;
 	if (b.x >= (size_t)img->width)
 		b.x = img->width - 1;
 	if (b.y >= (size_t)img->height)
@@ -66,8 +64,6 @@ void	put_vline(t_pixel p, size_t len, int col, t_img *img)
 		return ;
 	b = (t_pixel){p.x + (LINE_STROKE - 1) / 2, p.y + coord_transform(len)};
 	p.x -= (LINE_STROKE - 1) / 2;
-	if (p.x < 0)
-		p.x = 0;
 	if (b.x >= (size_t)img->width)
 		b.x = img->width - 1;
 	if (b.y >= (size_t)img->height)
