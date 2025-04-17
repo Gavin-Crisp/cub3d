@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   gnl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 13:42:53 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/24 13:39:15 by gcrisp           ###   ########.fr       */
+/*   Created: 2023/04/24 13:19:57 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/04/14 16:01:27 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_utils.h"
+#ifndef GNL_H
+# define GNL_H
+# include "libft.h"
 
-char	*reallocstr(char *s, size_t size)
+typedef struct s_file_buffer
 {
-	char	*new;
-	size_t	i;
+	char	buf[GNL_BUFFER_SIZE];
+	ssize_t	bytes_read;
+}	t_file_buffer;
 
-	new = malloc(size);
-	if (!new)
-		return (0);
-	i = 0;
-	while (s[i] && i < size - 1)
-	{
-		new[i] = s[i];
-		i++;
-	}
-	while (i < size)
-		new[i++] = 0;
-	free(s);
-	return (new);
-}
+char	*reallocstr(char *s, size_t size);
+char	*assignbuf(void);
 
-char	*assignbuf(void)
-{
-	char	*out;
-
-	out = ft_calloc(1, GNL_BUFFER_SIZE);
-	if (!out)
-		return (0);
-	return (out);
-}
+#endif

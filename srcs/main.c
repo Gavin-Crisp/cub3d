@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 13:24:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/04/11 14:53:09 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/17 12:20:51 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char *argv[])
 			printf("%s: Could not parse map file\n", argv[0]);
 		return (1);
 	}
-	mlx_hook(data.win, 17, 1L << 17, on_destroy, 0);
+	mlx_hook(data.win, 17, 1L << 17, on_destroy, &data);
 	mlx_hook(data.win, 2, 1L << 0, on_keydown, &data);
 	render(&data);
 	mlx_loop(data.mlx);

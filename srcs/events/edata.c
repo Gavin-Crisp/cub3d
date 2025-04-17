@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:30:26 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/04/11 14:59:43 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/17 12:11:00 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	clear_edata(t_edata *data)
 {
+	if (!data)
+		return ;
 	ft_vecfree(&data->cast.bounds, 0);
 	free_img(data->rd.walls[NORTH], data->mlx);
 	free_img(data->rd.walls[EAST], data->mlx);
